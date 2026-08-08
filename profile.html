@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head><meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title>My Profile | The Grill House</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="profile.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    </head>
+    <body>
+<nav class="navbar">
+    <div class="nav-left">
+        <img src="images/logo 1.png" alt="Logo" class="logo-img">
+        <div class="toggle-container" onclick="toggleMode()">
+            <span class="label-text">DINE-IN</span>
+            <div id="switch" class="toggle-switch"></div>
+            <span class="label-text">TAKEAWAY</span>
+        </div>
+    </div>
+    <div class="nav-right"><span class="nav-item" onclick="window.location.href='special.html'"><i class="fas fa-tag"></i> SPECIAL OFFERS</span>
+        <!-- <span class="nav-item"><i class="fas fa-chair"></i> TABLE ZONE</span> -->
+        <span class="nav-item" id="loginBtn"><i class="fas fa-user"></i> MY PROFILE</span>
+        <span class="nav-item"><i class="fas fa-shopping-bag"></i> CART</span>
+        <button class="search-btn" onclick="window.location.href='search.html'"><i class="fas fa-search"></i></button>
+    </div>
+</nav>
+<div class="profile-breadcrumb"><a href="index.html">Home</a>
+    <span>/</span> My Profile</div>
+    <main class="profile-shell">
+        <aside class="profile-sidebar">
+            <div class="profile-user">
+                <div class="profile-avatar" id="profileAvatar">GH</div>
+                <div><h3 id="profileName">Guest</h3><p id="profilePhone">+91 —</p></div>
+            </div>
+            <div class="coins-card"><i class="fa-solid fa-fire"></i><div>
+                <b id="coinCount">250</b>
+                <span>Grill Coins</span>
+            </div>
+        </div>
+        <nav class="profile-menu">
+            <button class="active" data-section="orders"><i class="fa-solid fa-clock-rotate-left"></i> Recent Orders</button>
+            <button data-section="addresses"><i class="fa-solid fa-location-dot"></i> Saved Addresses</button>
+            <button data-section="favourites"><i class="fa-solid fa-heart"></i> Favourite Items</button>
+            <button data-section="deals"><i class="fa-solid fa-ticket"></i> Saved Deals</button>
+            <button data-section="notifications"><i class="fa-solid fa-bell"></i> Notifications</button>
+            <button data-section="support"><i class="fa-solid fa-headset"></i> Help & Support</button>
+            <button data-section="about"><i class="fa-solid fa-utensils"></i> About Grill House</button>
+            <button data-section="settings"><i class="fa-solid fa-gear"></i> Settings</button>
+            <button class="logout" id="logoutBtn"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</button>
+        </nav>
+    </aside>
+    <section class="profile-content">
+        <div id="profileContent"></div>
+    </section>
+</main>
+<script src="script.js"></script>
+<script src="cart.js"></script>
+<script src="profile.js"></script>
+</body>
+</html>

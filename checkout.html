@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grill House</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="los.css">    
+    <link rel="stylesheet" href="checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>  
+<!-- ================= LOGIN POPUP ================= -->
+<div class="login-overlay" id="loginOverlay">
+    <div class="login-popup">
+        <button class="close-popup">&times;</button>
+        <div class="login-logo">
+            <img src="images/logo 1.png" alt="Logo">
+        </div>
+        <h2>Welcome</h2>
+        <p class="login-text" id="loginMessage">
+            Enter your mobile number to continue
+        </p>
+        <!-- Name (Only New Customer) -->
+        <div class="input-box" id="nameBox" style="display:none;">
+            <input type="text" id="txtName"placeholder="Enter your full name">
+        </div>
+        <!-- Mobile Number -->
+        <div class="mobile-box" id="mobileBox">
+            <span>+91</span>
+            <input type="text" id="txtPhone"maxlength="10"placeholder="Enter mobile number">
+        </div>
+        <!-- OTP Box (Hidden) -->
+        <div class="input-box" id="otpBox" style="display:none;">
+            <input type="text"id="txtOTP"maxlength="6"placeholder="Enter 6 Digit OTP">
+        </div>
+        <!-- Main Button -->
+        <button id="continueBtn">
+            CONTINUE
+        </button>
+        <!-- Back Button -->
+        <button id="backBtn" style="display:none;
+                   margin-top:10px;
+                   width:100%;
+                   padding:12px;
+                   border:none;
+                   border-radius:8px;
+                   cursor:pointer;
+                   background:#ececec;">
+            BACK
+        </button>
+      
+        <div class="popup-footer">
+            By continuing you agree to our
+            <a href="#">Terms & Conditions</a>
+            &
+            <a href="#">Privacy Policy</a>
+        </div>
+    </div>
+</div>
+<nav class="navbar">
+    <div class="nav-left">
+        <img src="images/logo 1.png" alt="Logo" class="logo-img">
+        <div class="toggle-container" onclick="toggleMode()">
+            <span class="label-text">DINE-IN</span>
+            <div id="switch" class="toggle-switch"></div>
+            <span class="label-text">TAKEAWAY</span>
+        </div>
+    </div>
+    
+    <div class="nav-right">
+        <span class="nav-item" onclick="window.location.href='special.html'"><i class="fas fa-tag"></i> SPECIAL OFFERS</span>
+        <!-- <span class="nav-item"><i class="fas fa-chair"></i> TABLE ZONE</span> -->
+        <span class="nav-item" id="loginBtn">
+    <i class="fas fa-user"></i> LOGIN
+</span>
+        <span class="nav-item"><i class="fas fa-shopping-bag"></i> CART</span>
+        <button class="search-btn" onclick="window.location.href='search.html'"><i class="fas fa-search"></i></button>
+    </div>
+</nav>
+
+
+<!-- =========================================
+     CART / CHECKOUT PAGE
+========================================= -->
+
+<div class="cart-page">
+
+    <!-- =====================================
+         LEFT SIDE
+    ====================================== -->
+
+    <div class="cart-left">
+
+        <!-- BREADCRUMB -->
+        <div class="breadcrumb">
+
+            <a href="index.html">Home</a>
+
+            <span>></span>
+
+            <b>Cart</b>
+
+        </div>
+
+
+        <!-- ORDER TYPE -->
+        <div class="order-type">
+
+            <h2>WHAT IS YOUR ORDER TYPE</h2>
+
+            <div class="order-tabs">
+
+                <button class="active">
+                    DINE-IN
+                </button>
+
+                <button>
+                    TAKEAWAY
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PERSONAL DETAILS -->
+        <div class="customer-details">
+
+            <h2>PERSONAL DETAILS</h2>
+
+            <div class="customer-card">
+
+                <span id="customerInfo">
+                    Guest User
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- RESTAURANT -->
+        <div class="restaurant-section">
+
+            <h2>RESTAURANT</h2>
+
+            <div class="restaurant-card">
+
+                <div class="restaurant-icon">
+
+                    <i class="fas fa-store"></i>
+
+                </div>
+
+                <div class="restaurant-info">
+
+                    <span>Restaurant</span>
+
+                    <p>
+                        Element One - Sector - 47 - Gurugram
+                        Burger King C/O Element One Block one,
+                        Sector 47.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PAYMENT -->
+        <div class="payment-section">
+
+            <div class="payment-heading">
+
+                <h2>
+                    CHOOSE PAYMENT MODE
+                </h2>
+
+                <strong id="paymentAmount">
+                    ₹355.96
+                </strong>
+
+            </div>
+
+
+            <h3>
+                PAY FOR ITEMS
+            </h3>
+
+
+            <div class="payment-card">
+
+                <div class="payment-icon">
+
+                    <i class="fas fa-credit-card"></i>
+
+                </div>
+
+
+                <div class="payment-info">
+
+                    <strong>
+                        Pay Online
+                    </strong>
+
+                    <span>
+                        Cards, Netbanking, UPI, Wallets
+                    </span>
+
+                </div>
+
+
+                <div class="payment-radio">
+
+                    <input
+                        type="radio"
+                        name="paymentMethod"
+                        value="online"
+                        checked
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="make-payment-btn"
+                id="makePaymentBtn">
+
+                MAKE PAYMENT
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         RIGHT SIDE
+    ====================================== -->
+
+    <div class="checkout-right">
+
+        <!-- YOUR CART TITLE -->
+
+        <h2 class="your-cart-title">
+            YOUR CART
+        </h2>
+
+
+        <!-- CART BOX -->
+
+        <div class="cart-box">
+
+            <div id="checkoutCartItems">
+
+                <!-- CART ITEMS JS SE AAYENGE -->
+
+            </div>
+
+
+            <!-- SPECIAL INSTRUCTIONS -->
+
+            <div class="instructions-box">
+
+                <span>▣</span>
+
+                <input
+                    type="text"
+                    id="specialInstructions"
+                    placeholder="Special instructions for your meal (optional)..."
+                >
+
+            </div>
+
+
+            <!-- CROWN + TABLE -->
+
+            <div class="cart-options">
+
+                <!-- CROWNS -->
+
+                <div class="crown-box">
+
+                    <span class="option-icon">
+                        ★
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            358 Crowns
+                        </strong>
+
+                        <small>
+                            WITH THIS ORDER!
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TABLE -->
+
+                <div class="table-box">
+
+                    <span class="option-icon">
+                        ▣
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Table No.
+                        </strong>
+
+                        <small>
+                            ADD / CHANGE
+                        </small>
+
+                    </div>
+
+                    <span class="arrow">
+                        ›
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             OFFERS
+        ================================== -->
+
+        <div class="offers-box">
+
+            <strong>
+                Offers
+            </strong>
+
+            <div class="offers-row">
+
+                <span>
+                    Select Promo code
+                </span>
+
+                <button>
+                    View Offers
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             DONATION
+        ================================== -->
+
+        <div class="donation-box">
+
+            <div class="donation-left">
+
+                <input
+                    type="checkbox"
+                    id="donation"
+                >
+
+                <label for="donation">
+
+                    (Optional) Donate ₹2 towards education
+                    of an underprivileged girl
+
+                    <br>
+
+                    In association with
+
+                    <a href="#">
+                        Room to Read
+                    </a>
+
+                </label>
+
+            </div>
+
+
+            <strong>
+                ₹2
+            </strong>
+
+        </div>
+
+
+        <!-- =================================
+             BILL SUMMARY
+        ================================== -->
+
+        <div class="bill-summary">
+
+            <div class="bill-row">
+
+                <span>
+                    Order Total
+                </span>
+
+                <strong id="orderTotal">
+                    ₹409.00
+                </strong>
+
+            </div>
+
+
+            <div class="bill-row discount">
+
+                <span>
+                    Discount
+                </span>
+
+                <strong id="discountAmount">
+                    - ₹70.00
+                </strong>
+
+            </div>
+
+
+            <div class="bill-row">
+
+                <span>
+                    Taxes and Charges ⓘ
+                </span>
+
+                <strong id="taxAmount">
+                    ₹16.96
+                </strong>
+
+            </div>
+
+
+            <div class="bill-divider"></div>
+
+
+            <div class="bill-row final-total">
+
+                <span>
+                    TO PAY
+                </span>
+
+                <strong id="finalAmount">
+                    ₹355.96
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<script src="script.js"></script>
+<script src="cart.js"></script>
+<script src="php.js"></script>
+<script src="checkout.js"></script>
+
+
+<!-- Firebase Login -->
+<!-- <script type="module" src="js/firebase-auth.js"></script> -->
+<script type="module" src="js/firebase-login.js"></script>
+
+</body>
+</html>

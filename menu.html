@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grill House Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="menu.css">
+<link rel="stylesheet" href="los.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <!-- ================= LOGIN POPUP ================= -->
+<div class="login-overlay" id="loginOverlay">
+    <div class="login-popup">
+        <button class="close-popup">&times;</button>
+        <div class="login-logo">
+            <img src="images/logo 1.png" alt="Logo">
+        </div>
+        <h2>Welcome</h2>
+        <p class="login-text" id="loginMessage">
+            Enter your mobile number to continue
+        </p>
+        <!-- Name (Only New Customer) -->
+        <div class="input-box" id="nameBox" style="display:none;">
+            <input type="text" id="txtName"placeholder="Enter your full name">
+        </div>
+        <!-- Mobile Number -->
+        <div class="mobile-box" id="mobileBox">
+            <span>+91</span>
+            <input type="text" id="txtPhone"maxlength="10"placeholder="Enter mobile number">
+        </div>
+        <!-- OTP Box (Hidden) -->
+        <div class="input-box" id="otpBox" style="display:none;">
+            <input type="text"id="txtOTP"maxlength="6"placeholder="Enter 6 Digit OTP">
+        </div>
+        <!-- Main Button -->
+        <button id="continueBtn">
+            CONTINUE
+        </button>
+        <!-- Back Button -->
+        <button id="backBtn" style="display:none;
+                   margin-top:10px;
+                   width:100%;
+                   padding:12px;
+                   border:none;
+                   border-radius:8px;
+                   cursor:pointer;
+                   background:#ececec;">
+            BACK
+        </button>
+      
+        <div class="popup-footer">
+            By continuing you agree to our
+            <a href="#">Terms & Conditions</a>
+            &
+            <a href="#">Privacy Policy</a>
+        </div>
+    </div>
+</div>
+<!-- navbarr -->
+<nav class="navbar">
+    <div class="nav-left">
+        <img src="images/logo 1.png" alt="Logo" class="logo-img">
+        <div class="toggle-container" onclick="toggleMode()">
+            <span class="label-text">DINE-IN</span>
+            <div id="switch" class="toggle-switch"></div>
+            <span class="label-text">TAKEAWAY</span>
+        </div>
+    </div>
+    
+    <div class="nav-right">
+        <span class="nav-item" onclick="window.location.href='special.html'"><i class="fas fa-tag"></i> SPECIAL OFFERS</span>
+        <!-- <span class="nav-item"><i class="fas fa-chair"></i> TABLE ZONE</span> -->
+        <span class="nav-item" id="loginBtn">
+    <i class="fas fa-user"></i> LOGIN
+</span>
+        <span class="nav-item"><i class="fas fa-shopping-bag"></i> CART</span>
+        <button class="search-btn" onclick="window.location.href='search.html'"><i class="fas fa-search"></i></button>
+    </div>
+</nav>
+<div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <i class="fas fa-angle-right"></i>
+    <span class="active-page">MENU</span>
+</div>
+ <!-- Main Wrapper -->
+    <div class="menu-wrapper">
+        <button class="arrow-btn-left" onclick="scrollMenu('left')">❮</button>
+        <div class="menu-scroll" id="menuScroll"></div>
+            <!-- 10 Categories -->           
+               <button class="arrow-btn-right" onclick="scrollMenu('right')">❯</button>
+    </div>
+<!-- ================= MENU + CART AREA ================= -->
+
+<div class="menu-cart-layout">
+
+    <!-- LEFT SIDE : PRODUCTS -->
+    <section class="products-section">
+
+        <h2 class="category-title"></h2>
+
+        <div id="menuProducts" class="products"></div>
+
+    </section>
+
+<!-- RIGHT SIDE -->
+<aside class="cart-wrapper">
+
+    <div class="cart-header" id="cartHeader">
+
+        <h2> CART</h2>
+
+        <span id="cartCount">0 Items</span>
+
+    </div>
+
+    <div class="cart-sidebar" id="cartSidebar">
+
+        <div class="cart-items" id="cartItems"></div>
+
+        <div class="cart-bottom">
+
+            <div class="cart-total-row">
+
+                <span>Subtotal</span>
+
+                <strong id="cartSubtotal">₹0.00</strong>
+
+            </div>
+
+            <button class="checkout-btn" id="checkoutBtn">
+
+                CHECKOUT
+
+            </button>
+
+        </div>
+
+    </div>
+
+</aside>
+<!-- ================= PRODUCT DETAILS POPUP ================= -->
+
+<div class="product-overlay" id="productOverlay">
+
+    <div class="product-popup">
+
+        <span class="close-product">&times;</span>
+
+        <img id="popupImage" src="" alt="Product">
+
+        <h2 id="popupTitle"></h2>
+
+        <p id="popupDescription"></p>
+
+        <h3 id="popupPrice"></h3>
+
+        <div class="qty-box">
+
+            <button id="minusQty">−</button>
+
+            <span id="qtyValue">1</span>
+
+            <button id="plusQty">+</button>
+
+        </div>
+
+        <button id="popupAddCart">
+
+            ADD TO CART
+
+        </button>
+
+    </div>
+
+</div>
+<!-- JS Products -->
+</section>
+<script src="script.js"></script>
+<script src="menu.js"></script>
+<script src="cart.js"></script>
+<script src="script.js"></script>
+<script type="module" src="js/firebase-login.js"></script>
+</body>
+</html>

@@ -1,0 +1,958 @@
+/* ===========================
+   CART PAGE
+=========================== */
+
+.cart-page{
+
+    max-width:1400px;
+    margin:35px auto;
+    padding:0 80px;
+    display:grid;
+    grid-template-columns: 1.7fr 0.9fr;
+    gap:40px;
+    align-items:start;
+
+}
+
+
+/* ===========================
+LEFT SIDE
+=========================== */
+
+.breadcrumb{
+
+    margin-bottom:40px;
+    font-size:14px;
+    color:#777;
+
+}
+
+.breadcrumb a{
+
+    color:#777;
+    text-decoration:none;
+
+}
+
+.breadcrumb span{
+
+    margin:0 8px;
+
+}
+
+.cart-left h2{
+
+    font-size:20px;
+    font-weight:700;
+    margin-bottom:15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+
+/* ===========================
+ORDER TYPE
+=========================== */
+
+.order-tabs{
+
+    width:350px;
+    height:35px;
+
+    background:#fff;
+
+    border-radius:40px;
+
+    display:flex;
+
+    overflow:hidden;
+
+    margin-bottom:35px;
+
+}
+
+.order-tabs button{
+
+    flex:1;
+
+    border:none;
+
+    background:#fff;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#666;
+
+}
+
+.order-tabs button.active{
+
+    background:#7b452f;
+
+    color:#fff;
+
+}
+
+
+/* ===========================
+INPUT BOX
+=========================== */
+
+.customer-card{
+
+    background:#fff;
+
+    height:65px;
+
+    border-radius:5px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 22px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+#customerInfo{
+
+    font-size:18px;
+
+    font-weight:500;
+
+    color:#222;
+
+}
+
+
+/* =========================================
+   RESTAURANT SECTION
+========================================= */
+
+.restaurant-section{
+
+    margin-top:28px;
+
+}
+
+.restaurant-section h2{
+
+    font-size:20px;
+
+    font-weight:800;
+
+    margin:0 0 18px 0;
+
+    color:#111;
+
+}
+
+
+/* =========================================
+   RESTAURANT CARD
+========================================= */
+
+.restaurant-card{
+
+    width:100%;
+
+    min-height:82px;
+
+    background:#fff;
+
+    border-radius:7px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    display:flex;
+
+    align-items:center;
+
+    padding:18px 20px;
+
+    box-sizing:border-box;
+
+}
+
+
+/* =========================================
+   RESTAURANT ICON
+========================================= */
+
+.restaurant-icon{
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-right:18px;
+
+}
+
+.restaurant-icon i{
+
+    font-size:30px;
+
+    color:#7b452f;
+
+}
+
+
+/* =========================================
+   RESTAURANT INFO
+========================================= */
+
+.restaurant-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+}
+
+.restaurant-info span{
+
+    font-size:11px;
+
+    color:#777;
+
+}
+
+.restaurant-info p{
+
+    margin:0;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#222;
+
+}
+
+
+/* =========================================
+   PAYMENT SECTION
+========================================= */
+
+.payment-section{
+
+    margin-top:30px;
+
+}
+
+.payment-heading{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:18px;
+
+}
+
+.payment-heading h2{
+
+    margin:0;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    color:#111;
+
+}
+
+.payment-heading strong{
+
+    font-size:16px;
+
+    color:#111;
+
+}
+
+
+/* =========================================
+   PAY FOR ITEMS
+========================================= */
+
+.payment-section > h3{
+
+    margin:0 0 18px 0;
+
+    font-size:13px;
+
+    font-weight:800;
+
+    color:#222;
+
+}
+
+
+/* =========================================
+   PAYMENT CARD
+========================================= */
+
+.payment-card{
+
+    width:100%;
+
+    min-height:68px;
+
+    background:#fff;
+
+    border-radius:7px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    display:flex;
+
+    align-items:center;
+
+    padding:15px 18px;
+
+    box-sizing:border-box;
+
+}
+
+
+/* =========================================
+   PAYMENT ICON
+========================================= */
+
+.payment-icon{
+
+    width:35px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-right:12px;
+
+}
+
+.payment-icon i{
+
+    font-size:19px;
+
+    color:#7b452f;
+
+}
+
+
+/* =========================================
+   PAYMENT INFO
+========================================= */
+
+.payment-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+
+    flex:1;
+
+}
+
+.payment-info strong{
+
+    font-size:15px;
+    font-weight: 600;
+
+    color:#222;
+
+}
+
+.payment-info span{
+
+    font-size:13px;
+
+    color:#777;
+
+}
+
+
+/* =========================================
+   PAYMENT RADIO
+========================================= */
+
+.payment-radio{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+.payment-radio input{
+
+    width:18px;
+
+    height:18px;
+
+    accent-color:#49e700;
+
+    cursor:pointer;
+
+}
+
+
+/* =========================================
+   MAKE PAYMENT BUTTON
+========================================= */
+
+.make-payment-btn{
+
+    width:330px;
+
+    height:48px;
+
+    margin-top:16px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#7b452f;
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:600;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.make-payment-btn:hover{
+
+    background:#60311f;
+
+}
+
+
+/* =========================================
+   CHECKOUT RIGHT SIDE
+========================================= */
+
+.checkout-right{
+    width:380px;
+    max-width:380px;
+    margin-left:auto;
+    margin-right:0;
+    box-sizing:border-box;
+}
+
+/* =========================================
+   YOUR CART TITLE
+========================================= */
+
+.your-cart-title{
+    margin:55px 0 12px 0;
+    padding:0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size:25px;
+    font-weight:900;
+    color:#111;
+
+    line-height:1.2;
+}
+
+/* =========================================
+   CART BOX
+========================================= */
+
+.cart-box{
+    width:100%;
+    box-sizing:border-box;
+
+    background:#fff;
+
+    padding:18px 16px 0;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.04);
+
+    overflow:hidden;
+}
+
+/* =========================================
+   CART ITEM
+========================================= */
+
+.checkout-cart-item{
+    width:100%;
+    box-sizing:border-box;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+
+    gap:15px;
+
+    padding-bottom:16px;
+
+    border-bottom:1px solid #eee;
+}
+
+/* =========================================
+   ITEM LEFT
+========================================= */
+
+.checkout-item-info{
+    flex:1;
+    min-width:0;
+}
+
+.checkout-item-info h3{
+    margin:0 0 4px;
+
+    font-size:14px;
+    line-height:18px;
+    font-weight:800;
+
+    color:#111;
+}
+
+.checkout-item-info p{
+    margin:0;
+
+    font-size:12px;
+    line-height:15px;
+
+    color:#555;
+}
+
+.customise{
+    display:block;
+
+    margin-top:14px;
+
+    font-size:12px;
+    font-weight:700;
+
+    color:#7b452f;
+}
+
+/* =========================================
+   ITEM RIGHT
+========================================= */
+
+.checkout-item-right{
+    width:85px;
+    min-width:85px;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:flex-end;
+    justify-content:flex-start;
+}
+
+.checkout-item-right strong{
+    margin-top:22px;
+
+    font-size:14px;
+
+    color:#111;
+}
+
+/* =========================================
+   QUANTITY
+========================================= */
+
+.checkout-qty{
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    width:72px;
+    height:30px;
+
+    border:1px solid #7b452f;
+
+    border-radius:18px;
+
+    box-sizing:border-box;
+}
+
+.checkout-qty button{
+    width:25px;
+    height:28px;
+
+    padding:0;
+
+    border:none;
+
+    background:transparent;
+
+    color:#7b452f;
+
+    font-size:17px;
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+.checkout-qty span{
+    width:22px;
+
+    text-align:center;
+
+    font-size:13px;
+    font-weight:700;
+
+    color:#111;
+}
+
+/* =========================================
+   INSTRUCTIONS
+========================================= */
+
+.instructions-box{
+    width:100%;
+    box-sizing:border-box;
+
+    display:flex;
+    align-items:center;
+
+    gap:8px;
+
+    height:38px;
+
+    margin-top:16px;
+
+    padding:0 10px;
+
+    background:#f5f5f5;
+
+    border-radius:3px;
+}
+
+.instructions-box span{
+    color:#aaa;
+
+    font-size:14px;
+}
+
+.instructions-box input{
+    width:100%;
+
+    min-width:0;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
+
+    font-size:11px;
+    color:#777;
+}
+
+/* =========================================
+   CROWN + TABLE
+========================================= */
+
+.cart-options{
+    width:calc(100% + 32px);
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    margin:16px -16px 0;
+}
+
+.crown-box,
+.table-box{
+    height:55px;
+
+    display:flex;
+    align-items:center;
+
+    gap:9px;
+
+    padding:0 14px;
+
+    box-sizing:border-box;
+
+    color:#fff;
+}
+
+.crown-box{
+    background:#632a1b;
+}
+
+.table-box{
+    background:#e52b0b;
+}
+
+.option-icon{
+    width:25px;
+    height:25px;
+
+    flex-shrink:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    color:#ffb900;
+
+    font-size:15px;
+}
+
+.crown-box strong,
+.table-box strong{
+    display:block;
+
+    font-size:13px;
+    line-height:15px;
+}
+
+.crown-box small,
+.table-box small{
+    display:block;
+
+    font-size:8px;
+    font-weight:700;
+}
+
+.arrow{
+    margin-left:auto;
+
+    font-size:22px;
+}
+
+/* =========================================
+   OFFERS
+========================================= */
+
+.offers-box{
+    width:100%;
+    box-sizing:border-box;
+
+    margin-top:8px;
+
+    padding:10px 12px;
+
+    background:#fff;
+
+    border:1px solid #ddd;
+
+    border-radius:4px;
+
+    box-shadow:0 2px 5px rgba(0,0,0,.08);
+}
+
+.offers-box > strong{
+    display:block;
+
+    color:#e35b16;
+
+    font-size:13px;
+
+    margin-bottom:5px;
+}
+
+.offers-row{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:10px;
+}
+
+.offers-row span{
+    font-size:10px;
+
+    color:#666;
+}
+
+.offers-row button{
+    border:none;
+
+    background:none;
+
+    color:#e35b16;
+
+    font-size:11px;
+    font-weight:700;
+
+    cursor:pointer;
+}
+
+/* =========================================
+   DONATION
+========================================= */
+
+.donation-box{
+    width:100%;
+    box-sizing:border-box;
+
+    margin-top:8px;
+
+    padding:12px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+    background:#fff;
+
+    border-top:1px solid #eee;
+    border-bottom:1px solid #eee;
+}
+
+.donation-left{
+    display:flex;
+
+    gap:6px;
+
+    flex:1;
+}
+
+.donation-left input{
+    margin-top:2px;
+
+    accent-color:#7b452f;
+}
+
+.donation-left label{
+    font-size:11px;
+
+    line-height:16px;
+
+    color:#555;
+}
+
+.donation-left a{
+    color:#222;
+
+    text-decoration:underline;
+}
+
+.donation-box > strong{
+    font-size:11px;
+
+    color:#222;
+
+    white-space:nowrap;
+}
+
+/* =========================================
+   BILL SUMMARY
+========================================= */
+
+.bill-summary{
+    width:100%;
+    box-sizing:border-box;
+
+    background:#fff;
+
+    padding:16px 12px;
+}
+
+.bill-row{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:11px;
+
+    font-size:12px;
+
+    color:#555;
+}
+
+.bill-row strong{
+    color:#111;
+
+    font-size:12px;
+}
+
+.bill-row.discount strong{
+    color:#72b900;
+}
+
+.bill-divider{
+    width:100%;
+
+    height:1px;
+
+    background:#eee;
+
+    margin:12px 0;
+}
+
+.final-total{
+    margin-bottom:0;
+
+    font-size:15px;
+    font-weight:800;
+}
+
+.final-total strong{
+    font-size:17px;
+
+    font-weight:800;
+
+    color:#7b452f;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width:1000px){
+
+    .checkout-right{
+        width:100%;
+        max-width:380px;
+        margin-left:auto;
+    }
+
+}
+
+@media (max-width:750px){
+
+    .checkout-right{
+        width:100%;
+        max-width:none;
+        margin:30px 0 0;
+    }
+
+}

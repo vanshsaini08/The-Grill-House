@@ -1,0 +1,902 @@
+/* =========================================
+   THE GRILL HOUSE - DEALS PAGE
+   Desktop optimized
+========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Slab:wght@600;700;800;900&display=swap');
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background: #ffffff;
+    color: #111111;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+
+/* =========================================
+   KING DEALS HEADER
+========================================= */
+
+.deals-header {
+    width: 100%;
+    height: 165px;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    padding-top: 38px;
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(255, 238, 80, 0.8) 0px,
+            rgba(255, 238, 80, 0.4) 100px,
+            transparent 220px
+        ),
+        radial-gradient(
+            circle at 80% 100%,
+            rgba(255, 220, 40, 0.55),
+            transparent 220px
+        ),
+        linear-gradient(
+            90deg,
+            #efc23b,
+            #f6ca28,
+            #edc13a
+        );
+}
+
+
+/* Decorative Circle */
+
+.deals-header::before {
+    content: "";
+
+    position: absolute;
+
+    width: 390px;
+    height: 390px;
+
+    left: -60px;
+    top: -245px;
+
+    border: 5px solid rgba(218, 155, 25, 0.35);
+
+    border-radius: 50%;
+}
+
+
+/* =========================================
+   HEADER TITLE
+========================================= */
+
+.deals-header h1 {
+    position: relative;
+    z-index: 2;
+
+    margin: 0 0 20px;
+
+    color: #ffffff;
+
+    font-family: 'Roboto Slab', Georgia, serif;
+
+    font-size: 32px;
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: -0.5px;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   DELIVERY / DINE-IN TOGGLE
+========================================= */
+
+.deal-toggle {
+    position: relative;
+    z-index: 2;
+
+    width: 330px;
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 4px;
+
+    background: #ffffff;
+
+    border-radius: 30px;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.10);
+}
+
+
+.deal-toggle button {
+    width: 50%;
+    height: 46px;
+
+    border: none;
+    outline: none;
+
+    border-radius: 25px;
+
+    background: transparent;
+
+    font-family: 'Roboto Slab', Georgia, serif;
+
+    font-size: 15px;
+    line-height: 16px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+/* Delivery */
+
+.delivery-btn {
+    color: #999999;
+}
+
+
+/* Active Dine In */
+
+.dine-btn.active {
+    color: #ffffff;
+
+    background: #713b2f;
+
+    box-shadow:
+        inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+}
+
+
+/* =========================================
+   COMMON CONTAINER
+========================================= */
+
+.section-container {
+    width: calc(100% - 200px);
+
+    max-width: 1155px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   TOP DEALS
+========================================= */
+
+.top-deals {
+    width: 100%;
+
+    background: #ffffff;
+
+    padding: 38px 0 38px;
+}
+
+
+.top-deals h2,
+.limited-deals h2 {
+
+    font-family: 'Roboto Slab', Georgia, serif;
+
+    font-size: 30px;
+
+    line-height: 1.2;
+
+    font-weight: 900;
+
+    color: #080808;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   DEAL LIST
+========================================= */
+
+.top-deals-list {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+
+    margin-top: 30px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   DEAL CARD
+========================================= */
+
+.deal-card {
+
+    width: 400px;
+    height: 194px;
+
+    flex: 0 0 400px;
+
+    overflow: hidden;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    background: #eeeeee;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.deal-card:hover {
+
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 8px 18px rgba(0, 0, 0, 0.15);
+}
+
+
+.deal-card img {
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+
+/* =========================================
+   LIMITED TIME DEALS
+========================================= */
+
+.limited-deals {
+
+    width: 100%;
+
+    min-height: 230px;
+
+    padding: 65px 0 45px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f4e7d9 0%,
+            #efb47c 100%
+        );
+}
+
+
+.limited-deals h2 {
+
+    font-size: 30px;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================
+   DEAL TABS
+========================================= */
+
+.deal-tabs {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.tab {
+
+    border: none;
+
+    padding: 8px 20px;
+
+    border-radius: 20px;
+
+    background: transparent;
+
+    color: #333333;
+
+    font-family: 'Roboto', Arial, sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+
+.tab.active {
+
+    background: #ffffff;
+
+    color: #111111;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================
+   NO OFFERS
+========================================= */
+
+.no-offers {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 48px;
+}
+
+
+.no-offers p {
+
+    font-family: 'Roboto', Arial, sans-serif;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    color: #111111;
+}
+
+
+/* =========================================
+   LOYALTY SECTION
+========================================= */
+
+.loyalty-section {
+
+    width: 100%;
+
+    padding: 32px 0 0;
+
+    background: #ffffff;
+}
+
+
+.loyalty-container {
+
+    width: calc(100% - 200px);
+
+    max-width: 1155px;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   LOYALTY TITLE
+========================================= */
+
+.loyalty-title {
+
+    width: 100%;
+
+    height: 72px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f0c12c,
+            #ffd633,
+            #efc32b
+        );
+
+    color: #252525;
+
+    font-family: Impact, 'Arial Black', sans-serif;
+
+    font-size: 41px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   LOYALTY COLUMNS
+========================================= */
+
+.loyalty-columns {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+}
+
+
+.loyalty-box {
+
+    min-height: 245px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================================
+   EARN BOX
+========================================= */
+
+.earn-box {
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a9d5,
+            #0798ca
+        );
+}
+
+
+/* =========================================
+   PLAY BOX
+========================================= */
+
+.play-box {
+
+    background:
+        linear-gradient(
+            135deg,
+            #c51ab0,
+            #aa129e
+        );
+}
+
+
+/* =========================================
+   REDEEM BOX
+========================================= */
+
+.redeem-box {
+
+    background:
+        linear-gradient(
+            135deg,
+            #a64b30,
+            #8d3928
+        );
+}
+
+
+/* =========================================
+   LOYALTY TEXT
+========================================= */
+
+.loyalty-box h3 {
+
+    color: #ffffff;
+
+    font-family: Impact, 'Arial Black', sans-serif;
+
+    font-size: 27px;
+
+    line-height: 1.15;
+
+    font-weight: 900;
+
+    letter-spacing: 0.5px;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   BURGER ICON
+========================================= */
+
+.burger-icon {
+
+    font-size: 82px;
+
+    margin-top: 15px;
+
+    line-height: 1;
+}
+
+
+/* =========================================
+   CROWN ICON
+========================================= */
+
+.crown-icon {
+
+    width: 100px;
+    height: 100px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #ffd735;
+
+    border: 5px solid #ffe67a;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.22);
+
+    font-size: 54px;
+
+    margin-bottom: 16px;
+}
+
+
+/* =========================================
+   OFFER ICON
+========================================= */
+
+.offer-icon {
+
+    width: 85px;
+    height: 85px;
+
+    margin-top: 16px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #65be3c;
+
+    border: 5px solid #d6efc7;
+
+    color: #ffffff;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 48px;
+
+    font-weight: 900;
+
+    transform: rotate(-7deg);
+}
+
+
+/* =========================================
+   DISCLAIMER
+========================================= */
+
+.disclaimer {
+
+    width: 100%;
+
+    text-align: center;
+
+    padding: 5px 0;
+
+    font-size: 6px;
+
+    color: #222222;
+}
+
+
+/* =========================================
+   RESPONSIVE - 1000px
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .section-container,
+    .loyalty-container {
+
+        width: calc(100% - 80px);
+    }
+
+
+    .deal-card {
+
+        width: 350px;
+
+        height: 170px;
+
+        flex-basis: 350px;
+    }
+
+
+    .loyalty-box h3 {
+
+        font-size: 22px;
+    }
+
+
+    .loyalty-title {
+
+        font-size: 35px;
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE - 700px
+========================================= */
+
+@media (max-width: 700px) {
+
+    .deals-header {
+
+        height: 135px;
+
+        padding-top: 28px;
+    }
+
+
+    .deals-header h1 {
+
+        font-size: 25px;
+
+        margin-bottom: 15px;
+    }
+
+
+    .deal-toggle {
+
+        width: 275px;
+
+        height: 47px;
+    }
+
+
+    .deal-toggle button {
+
+        height: 39px;
+
+        font-size: 12px;
+    }
+
+
+    .section-container,
+    .loyalty-container {
+
+        width: calc(100% - 40px);
+    }
+
+
+    .top-deals {
+
+        padding-top: 28px;
+
+        padding-bottom: 30px;
+    }
+
+
+    .top-deals h2,
+    .limited-deals h2 {
+
+        font-size: 24px;
+    }
+
+
+    .top-deals-list {
+
+        gap: 16px;
+
+        margin-top: 22px;
+    }
+
+
+    .deal-card {
+
+        width: 300px;
+
+        height: 145px;
+
+        flex-basis: 300px;
+    }
+
+
+    .limited-deals {
+
+        min-height: 200px;
+
+        padding: 45px 0 35px;
+    }
+
+
+    .loyalty-section {
+
+        padding-top: 25px;
+    }
+
+
+    .loyalty-title {
+
+        height: 58px;
+
+        font-size: 29px;
+    }
+
+
+    .loyalty-box {
+
+        min-height: 190px;
+    }
+
+
+    .loyalty-box h3 {
+
+        font-size: 17px;
+    }
+
+
+    .burger-icon {
+
+        font-size: 55px;
+    }
+
+
+    .crown-icon {
+
+        width: 70px;
+
+        height: 70px;
+
+        font-size: 38px;
+    }
+
+
+    .offer-icon {
+
+        width: 60px;
+
+        height: 60px;
+
+        font-size: 32px;
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE - 480px
+========================================= */
+
+@media (max-width: 480px) {
+
+    .section-container,
+    .loyalty-container {
+
+        width: calc(100% - 24px);
+    }
+
+
+    .deals-header {
+
+        height: 120px;
+    }
+
+
+    .deals-header h1 {
+
+        font-size: 21px;
+    }
+
+
+    .deal-toggle {
+
+        width: 235px;
+
+        height: 43px;
+    }
+
+
+    .deal-toggle button {
+
+        height: 35px;
+
+        font-size: 11px;
+    }
+
+
+    .deal-card {
+
+        width: 250px;
+
+        height: 121px;
+
+        flex-basis: 250px;
+    }
+
+
+    .loyalty-title {
+
+        height: 52px;
+
+        font-size: 25px;
+    }
+
+
+    .loyalty-columns {
+
+        grid-template-columns: 1fr;
+    }
+
+
+    .loyalty-box {
+
+        min-height: 175px;
+    }
+
+
+    .loyalty-box h3 {
+
+        font-size: 15px;
+    }
+}
