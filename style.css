@@ -180,8 +180,8 @@ body{
     text-align: center;
     background: white;
     padding: 10px;
-    height: 140px;
-    border-radius: 15px;
+    height: 110px;
+    border-radius: 5px;
     cursor: pointer;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     transition: 0.3s;
@@ -368,83 +368,6 @@ body{
     display: block;
     border-radius: 15px; 
     box-shadow: 0 8px 16px rgba(0,0,0,0.3); 
-}
-
-/* Search Page Styles */
-.search-page-body { background-color: #fdfaf6; }
-.search-container { padding: 60px 10%; }
-
-.search-input-box {
-    position: relative; 
-    display: flex; 
-    align-items: center;
-    background: #fff; 
-    border-radius: 50px; 
-    padding: 10px 25px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
-    border: 1px solid #ddd;
-}
-
-#searchInput { 
-    width: 100%; 
-    padding: 10px; 
-    font-size: 18px; 
-    border: none; 
-    outline: none; 
-    background: transparent; 
-}
-
-.clear-btn { 
-    background: #fff;            /* White background */
-    border: 1px solid #eee;      /* Light border */
-    width: 35px;                 /* Circle size */
-    height: 35px; 
-    border-radius: 50%;          /* Perfect circle */
-    font-size: 16px; 
-    cursor: pointer; 
-    color: #5d3a1a;              /* Burger King Brown color */
-    display: none;               /* Default hidden */
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Halka sa shadow */
-    margin-right: 10px;          /* Thodi jagah */
-    font-weight: 800;
-}
-
-.clear-btn:hover {
-    background: #f9f9f9;
-}
-.close-search-btn { 
-    text-decoration: none; 
-    color: black; 
-    font-size: 24px; 
-    margin-left: 15px; 
-}
-
-/* Vertical Alignment Section */
-.popular-section { 
-    margin-top: 40px; 
-    display: flex; 
-    flex-direction: column; /* Vertical ke liye */
-    gap: 12px;              /* Buttons ke beech space */
-}
-
-.popular-section p { 
-    font-weight: 700; 
-    color: #333; 
-    margin-bottom: 5px; 
-}
-
-.tag { 
-    padding: 15px 20px; 
-    background: #f0f0f0; 
-    border: none; 
-    border-radius: 10px; /* Thoda rectangular shape */
-    cursor: pointer; 
-    font-weight: 600; 
-    text-align: left;    /* Text left align */
-    width: 100%;         /* Poori width lega */
-    max-width: 400px;    /* List ki width limit */
 }
 
 

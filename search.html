@@ -5,6 +5,8 @@
     <title>Search | The Grill House</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="los.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="search.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="search-page-body">
@@ -78,18 +80,122 @@
         <button class="search-btn" onclick="window.location.href='search.html'"><i class="fas fa-search"></i></button>
     </div>
 </nav>
+<div class="profile-breadcrumb"><a href="index.html">Home</a>
+    <span>/</span> Search</div>
+
+<!-- ================= SEARCH ================= -->
+
 <div class="search-container">
+
+    <!-- SEARCH INPUT -->
     <div class="search-input-box">
-    <input type="text" id="searchInput" placeholder="search here..." oninput="showClear()">
-    <button id="clearBtn" class="clear-btn" onclick="clearSearch()">✕</button>
-</div>
-    <div class="popular-section">
-        <p>POPULAR SEARCHES</p>
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search here..."
+            autocomplete="off"
+        >
+
+        <button
+            type="button"
+            id="clearBtn"
+            class="clear-btn"
+            onclick="clearSearch()"
+        >
+            ✕
+        </button>
+
     </div>
+
+
+    <!-- ================= POPULAR SEARCHES ================= -->
+
+    <div class="popular-section">
+
+        <p>POPULAR SEARCHES</p>
+
+        <div class="popular-searches">
+
+            <button
+                type="button"
+                onclick="searchPopular('Pizza')"
+            >
+                Pizza
+            </button>
+
+            <button
+                type="button"
+                onclick="searchPopular('Burger')"
+            >
+                Burger
+            </button>
+
+            <!-- <button
+                type="button"
+                onclick="searchPopular('Fries')"
+            >
+                Fries
+            </button>
+
+            <button
+                type="button"
+                onclick="searchPopular('Cake')"
+            >
+                Cake
+            </button>
+
+            <button
+                type="button"
+                onclick="searchPopular('Coke')"
+            >
+                Coke
+            </button> -->
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SEARCH RESULTS ================= -->
+
+    <section class="search-results-section">
+
+        <h2 id="searchResultTitle"></h2>
+
+        <div
+            id="searchResults"
+            class="products"
+        >
+
+            <!-- Search products JavaScript se load honge -->
+
+        </div>
+
+        <!-- NO RESULTS -->
+        <div
+            id="noSearchResults"
+            class="no-search-results"
+            style="display:none;"
+        >
+
+            <i class="fas fa-search"></i>
+
+            <h3>No items found</h3>
+
+            <p>
+                Try searching for another food item.
+            </p>
+
+        </div>
+
+    </section>
+
 </div>
 <script src="menu.js"></script>
 <script src="cart.js"></script>
 <script src="script.js"></script>
+<script src="seach.js"></script>
 <script type="module" src="js/firebase-login.js"></script>
 </body>
 </html>
