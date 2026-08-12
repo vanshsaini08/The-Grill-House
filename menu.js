@@ -254,8 +254,7 @@ window.onload=async()=>{
 
 
 
-
-document.getElementById("popupAddCart").onclick = function(){
+document.getElementById("popupAddCart").onclick = function () {
 
     const item = {
 
@@ -271,8 +270,24 @@ document.getElementById("popupAddCart").onclick = function(){
 
     };
 
+    // ================= ADD DIRECTLY TO CART =================
+
     addToCart(item);
 
-    document.getElementById("productOverlay").classList.remove("show");
+    // ================= CLOSE PRODUCT POPUP =================
+
+    document
+        .getElementById("productOverlay")
+        .classList.remove("show");
+
+    // ================= OPEN CART =================
+
+    const cartSidebar = document.getElementById("cartSidebar");
+
+    if (cartSidebar) {
+
+        cartSidebar.classList.add("open");
+
+    }
 
 };

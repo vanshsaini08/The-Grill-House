@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="los.css">
     <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="search.css">
+    <link rel="stylesheet" href="menu.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="search-page-body">
@@ -108,7 +109,43 @@
 
     </div>
 
+<!-- ================= PRODUCT POPUP ================= -->
 
+<div class="product-overlay" id="productOverlay">
+
+    <div class="product-popup">
+
+        <span class="close-product">&times;</span>
+
+        <img
+            id="popupImage"
+            src=""
+            alt="Product"
+        >
+
+        <h2 id="popupTitle"></h2>
+
+        <p id="popupDescription"></p>
+
+        <h3 id="popupPrice">₹0.00</h3>
+
+        <div class="qty-box">
+
+            <button id="minusQty">−</button>
+
+            <span id="qtyValue">1</span>
+
+            <button id="plusQty">+</button>
+
+        </div>
+
+        <button id="popupAddCart">
+            ADD TO CART
+        </button>
+
+    </div>
+
+</div>
     <!-- ================= POPULAR SEARCHES ================= -->
 
     <div class="popular-section">
@@ -192,9 +229,10 @@
     </section>
 
 </div>
-<script src="menu.js"></script>
+
 <script src="cart.js"></script>
 <script src="script.js"></script>
+<script src="menu.js"></script>
 <script src="seach.js"></script>
 <script type="module" src="js/firebase-login.js"></script>
 </body>

@@ -401,3 +401,138 @@
     }
 
 }
+
+/* =========================================
+   SEARCH PAGE - FINAL FIX
+   MENU CSS KO TOUCH NAHI KARNA
+========================================= */
+
+.search-page-body .search-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 35px 30px 60px;
+    box-sizing: border-box;
+}
+
+/* SEARCH RESULTS */
+.search-page-body .search-results-section {
+    width: 100%;
+    margin-top: 45px;
+    padding: 0;
+}
+
+/* RESULT TITLE */
+.search-page-body #searchResultTitle {
+    margin: 0 0 25px 0 !important;
+    padding: 0 !important;
+    text-align: left;
+}
+
+/* PRODUCT GRID */
+.search-page-body #searchResults {
+    width: 100% !important;
+
+    display: grid !important;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+
+    gap: 22px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    box-sizing: border-box;
+}
+
+/* PRODUCT CARD */
+.search-page-body #searchResults .product-card {
+    width: 100% !important;
+    max-width: none !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    position: relative;
+    left: auto !important;
+
+    box-sizing: border-box;
+
+    transform: none;
+}
+
+/* IMAGE */
+.search-page-body #searchResults .product-card img {
+    width: 100%;
+    height: 190px;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+/* HOVER */
+.search-page-body #searchResults .product-card:hover {
+    transform: translateY(-5px);
+}
+
+/* NO RESULTS */
+.search-page-body .no-search-results {
+    width: 100%;
+    margin: 0 !important;
+    padding: 70px 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .search-page-body #searchResults {
+        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .search-page-body .search-container {
+        padding: 25px 15px 40px;
+    }
+
+    .search-page-body #searchResults {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 14px !important;
+    }
+
+    .search-page-body #searchResults .product-card img {
+        height: 140px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 450px) {
+
+    .search-page-body #searchResults {
+        grid-template-columns: 1fr !important;
+    }
+
+    .search-page-body #searchResults .product-card img {
+        height: 190px;
+    }
+
+}
