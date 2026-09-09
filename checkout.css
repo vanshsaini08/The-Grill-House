@@ -956,3 +956,262 @@ INPUT BOX
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+/* ================= PAYMENT POPUP ================= */
+
+.payment-overlay {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+
+    z-index: 99999;
+}
+
+.payment-overlay.show {
+    display: flex;
+}
+
+.payment-popup {
+    width: 420px;
+
+    background: #fff;
+
+    border-radius: 16px;
+
+    padding: 30px;
+
+    position: relative;
+
+    box-shadow: 0 15px 50px rgba(0,0,0,.25);
+}
+
+.payment-close {
+    position: absolute;
+
+    top: 12px;
+    right: 18px;
+
+    border: none;
+    background: none;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    color: #555;
+}
+
+.payment-popup h2 {
+    margin: 0;
+
+    text-align: center;
+
+    font-size: 22px;
+}
+
+.payment-popup > p {
+    text-align: center;
+
+    color: #777;
+
+    margin-bottom: 25px;
+}
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+.payment-option {
+    display: block;
+
+    cursor: pointer;
+}
+
+.payment-option input {
+    display: none;
+}
+
+.payment-option-content {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 16px;
+
+    border: 2px solid #eee;
+
+    border-radius: 12px;
+
+    transition: .2s;
+}
+
+.payment-option-content i {
+    font-size: 24px;
+
+    color: #7b452f;
+
+    width: 30px;
+
+    text-align: center;
+}
+
+.payment-option-content div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.payment-option-content span {
+    font-size: 12px;
+
+    color: #777;
+}
+
+.payment-option input:checked
++ .payment-option-content {
+    border-color: #7b452f;
+
+    background: #faf5f2;
+}
+
+.confirm-payment-btn {
+    width: 100%;
+
+    height: 50px;
+
+    margin-top: 25px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: #7b452f;
+
+    color: #fff;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.confirm-payment-btn:hover {
+    background: #60311f;
+}
+
+
+
+/* ===========================
+   PERSONAL DETAILS
+=========================== */
+
+.customer-details h2{
+    font-size:20px;
+    font-weight:800;
+    margin-bottom:15px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+/* ===========================
+   CUSTOMER CARD
+=========================== */
+
+.customer-card{
+
+    width:100%;
+    min-height:80px;
+
+    background:#fff;
+
+    border-radius:7px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 30px;
+
+    box-sizing:border-box;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+
+/* ===========================
+   LOGIN MESSAGE
+=========================== */
+
+#customerInfo{
+
+    font-size:14px;
+
+    font-weight:800;
+
+    color:#111;
+
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+
+/* ===========================
+   LOGIN TO PLACE ORDER
+=========================== */
+
+#cartLoginBtn{
+
+    width:248px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:25px;
+
+    background:#7b452f;
+
+    color:#fff;
+
+    font-size:14px;
+
+    font-weight:800;
+
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+#cartLoginBtn:hover{
+
+    background:#60311f;
+
+}

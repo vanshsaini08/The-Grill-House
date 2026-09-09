@@ -20,7 +20,13 @@
     <div class="nav-right"><span class="nav-item" onclick="window.location.href='special.html'"><i class="fas fa-tag"></i> SPECIAL OFFERS</span>
         <!-- <span class="nav-item"><i class="fas fa-chair"></i> TABLE ZONE</span> -->
         <span class="nav-item" id="loginBtn"><i class="fas fa-user"></i> MY PROFILE</span>
-        <span class="nav-item"><i class="fas fa-shopping-bag"></i> CART</span>
+       <span class="nav-item cart-nav" id="cartNav">
+    <span class="cart-icon-wrapper">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="navCartCount" class="nav-cart-badge">0</span>
+    </span>
+    <span>CART</span>
+</span>
         <button class="search-btn" onclick="window.location.href='search.html'"><i class="fas fa-search"></i></button>
     </div>
 </nav>
@@ -39,8 +45,8 @@
         </div>
         <nav class="profile-menu">
             <button class="active" data-section="orders"><i class="fa-solid fa-clock-rotate-left"></i> Recent Orders</button>
-            <button data-section="addresses"><i class="fa-solid fa-location-dot"></i> Saved Addresses</button>
-            <button data-section="favourites"><i class="fa-solid fa-heart"></i> Favourite Items</button>
+            <!-- <button data-section="addresses"><i class="fa-solid fa-location-dot"></i> Saved Addresses</button> -->
+            <!-- <button data-section="favourites"><i class="fa-solid fa-heart"></i> Favourite Items</button> -->
             <button data-section="deals"><i class="fa-solid fa-ticket"></i> Saved Deals</button>
             <button data-section="notifications"><i class="fa-solid fa-bell"></i> Notifications</button>
             <button data-section="support"><i class="fa-solid fa-headset"></i> Help & Support</button>

@@ -34,3 +34,99 @@ fetch("api/get_categories.php")
 .catch(error => {
     console.error("Category Load Error:", error);
 });
+
+// ==========================================
+// SPECIAL OFFER TOGGLE
+// ==========================================
+
+function toggleSpecialMode() {
+
+    const specialToggle =
+        document.querySelector(".deal-toggle");
+
+    if (!specialToggle) return;
+
+
+    // Toggle Special Offer
+    specialToggle.classList.toggle("switched");
+
+
+    // Get current state
+    const isDineIn =
+        specialToggle.classList.contains("switched");
+
+
+    // Save order type
+    if (isDineIn) {
+
+        sessionStorage.setItem(
+            "orderType",
+            "dinein"
+        );
+
+    } else {
+
+        sessionStorage.setItem(
+            "orderType",
+            "takeaway"
+        );
+
+    }
+
+
+    // ==========================================
+    // ALSO UPDATE NAVBAR TOGGLE
+    // ==========================================
+
+    const navbarToggle =
+        document.querySelector(
+            ".navbar .toggle-container"
+        );
+
+    if (navbarToggle) {
+
+        if (isDineIn) {
+
+            navbarToggle.classList.add("switched");
+
+        } else {
+
+            navbarToggle.classList.remove("switched");
+
+        }
+
+    }
+
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const specialToggle =
+        document.querySelector(".deal-toggle");
+
+    if (!specialToggle) return;
+
+
+    const orderType =
+        sessionStorage.getItem("orderType");
+
+
+    if (orderType === "dinein") {
+
+        specialToggle.classList.add("switched");
+
+    } else {
+
+        specialToggle.classList.remove("switched");
+
+    }
+
+});
+
+
+
+
+
+
+
+

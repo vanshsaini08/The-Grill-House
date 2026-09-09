@@ -5,23 +5,33 @@
 
 console.log("OTP LOGIN JS LOADED ✅");
 
+
 document.addEventListener("DOMContentLoaded", function () {
 
-    const continueBtn = document.getElementById("continueBtn");
-    const phoneInput = document.getElementById("txtPhone");
+    const continueBtn =
+        document.getElementById("continueBtn");
 
-    const mobileBox = document.getElementById("mobileBox");
-    const otpBox = document.getElementById("otpBox");
+    const phoneInput =
+        document.getElementById("txtPhone");
 
-    const txtOTP = document.getElementById("txtOTP");
+    const mobileBox =
+        document.getElementById("mobileBox");
 
-    const nameBox = document.getElementById("nameBox");
-    const txtName = document.getElementById("txtName");
+    const otpBox =
+        document.getElementById("otpBox");
 
-    const loginOverlay = document.getElementById("loginOverlay");
+    const txtOTP =
+        document.getElementById("txtOTP");
 
-    let enteredMobile = "";
-    let customerId = "";
+    const nameBox =
+        document.getElementById("nameBox");
+
+    const txtName =
+        document.getElementById("txtName");
+
+    const loginOverlay =
+        document.getElementById("loginOverlay");
+
 
     // ==========================================
     // CHECK HTML ELEMENTS
@@ -54,6 +64,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==========================================
+    // VARIABLES
+    // ==========================================
+
+    let enteredMobile = "";
+    let customerId = "";
+
+
+    // ==========================================
     // INITIAL STATE
     // ==========================================
 
@@ -68,370 +86,423 @@ document.addEventListener("DOMContentLoaded", function () {
     // CONTINUE BUTTON
     // ==========================================
 
-    continueBtn.addEventListener("click", async function () {
+    continueBtn.addEventListener(
+        "click",
+        async function () {
 
-        // ======================================
-        // STEP 1 - MOBILE NUMBER
-        // ======================================
+            // ======================================
+            // STEP 1 - MOBILE
+            // ======================================
 
-        if (otpBox.style.display === "none") {
+            if (
+                otpBox.style.display === "none" &&
+                (!nameBox ||
+                 nameBox.style.display === "none")
+            ) {
 
-            const phone = phoneInput.value.trim();
-
-            // Validate mobile
-            if (!/^[0-9]{10}$/.test(phone)) {
-
-                alert("Enter Valid 10 Digit Mobile Number");
-
-                return;
-            }
-
-            enteredMobile = phone;
-
-            console.log("Mobile:", enteredMobile);
+                const phone =
+                    phoneInput.value.trim();
 
 
-            // ==================================
-            // DEMO OTP
-            // ==================================
+                if (!/^[0-9]{10}$/.test(phone)) {
 
-            alert(
-                "OTP Sent Successfully ✅\n\n" +
-                "Demo OTP: 123456"
-            );
+                    alert(
+                        "Enter Valid 10 Digit Mobile Number"
+                    );
 
-
-            // Hide mobile
-            mobileBox.style.display = "none";
-
-
-            // Show OTP
-            otpBox.style.display = "flex";
-
-
-            // Change button
-            continueBtn.innerText = "VERIFY OTP";
-
-
-            // Focus OTP
-            txtOTP.focus();
-
-            return;
-        }
-
-
-        // ======================================
-        // STEP 2 - VERIFY OTP
-        // ======================================
-
-        const otp = txtOTP.value.trim();
-
-
-        if (!/^[0-9]{6}$/.test(otp)) {
-
-            alert("Enter 6 Digit OTP");
-
-            return;
-        }
-
-
-        // ==================================
-        // DEMO OTP CHECK
-        // ==================================
-
-        if (otp !== "123456") {
-
-            alert("Invalid OTP ❌");
-
-            return;
-        }
-
-
-        console.log("OTP VERIFIED ✅");
-
-
-        continueBtn.disabled = true;
-
-        continueBtn.innerText = "CHECKING...";
-
-
-        // ======================================
-        // STEP 3 - CHECK CUSTOMER
-        // ======================================
-
-        try {
-
-            const formData = new FormData();
-
-            formData.append(
-                "mobile",
-                enteredMobile
-            );
-
-
-            const response = await fetch(
-                "api/check_customer.php",
-                {
-                    method: "POST",
-                    body: formData
+                    return;
                 }
-            );
 
 
-            // ==================================
-            // GET RAW PHP RESPONSE
-            // ==================================
-
-            const rawResponse = await response.text();
-
-            console.log(
-                "CHECK CUSTOMER RESPONSE:",
-                rawResponse
-            );
-
-
-            // ==================================
-            // EMPTY RESPONSE
-            // ==================================
-
-            if (!rawResponse.trim()) {
-
-                alert(
-                    "PHP se empty response aa raha hai."
-                );
-
-                continueBtn.disabled = false;
-
-                continueBtn.innerText = "VERIFY OTP";
-
-                return;
-            }
-
-
-            // ==================================
-            // JSON PARSE
-            // ==================================
-
-            let data;
-
-            try {
-
-                data = JSON.parse(rawResponse);
-
-            }
-            catch (jsonError) {
-
-                console.error(
-                    "PHP RESPONSE JSON ERROR:",
-                    rawResponse
-                );
-
-                alert(
-                    "PHP se valid JSON response nahi aa raha.\n\n" +
-                    "Browser Console check karo."
-                );
-
-                continueBtn.disabled = false;
-
-                continueBtn.innerText = "VERIFY OTP";
-
-                return;
-            }
-
-
-            console.log(
-                "CUSTOMER DATA:",
-                data
-            );
-
-
-            // ==================================
-            // PHP STATUS FALSE
-            // ==================================
-
-            if (!data.status) {
-
-                alert(
-                    data.message ||
-                    "Customer check failed"
-                );
-
-                continueBtn.disabled = false;
-
-                continueBtn.innerText = "VERIFY OTP";
-
-                return;
-            }
-
-
-            // ======================================
-            // EXISTING CUSTOMER
-            // ======================================
-
-            if (data.exists === true) {
-
-                customerId = data.customer_id;
-
-                const customerName =
-                    data.customer_name;
+                enteredMobile = phone;
 
 
                 console.log(
-                    "Existing Customer:",
-                    customerName
-                );
-
-
-                // Save customer information
-                localStorage.setItem(
-                    "customerId",
-                    customerId
-                );
-
-                localStorage.setItem(
-                    "customerName",
-                    customerName
-                );
-
-                localStorage.setItem(
-                    "customerPhone",
+                    "Mobile:",
                     enteredMobile
                 );
 
-                localStorage.setItem(
-                    "isLoggedIn",
-                    "true"
-                );
 
-
-                // Update last login
-                await updateLastLogin(
-                    customerId
-                );
-
+                // ==================================
+                // DEMO OTP
+                // ==================================
 
                 alert(
-                    "Welcome Back " +
-                    customerName +
-                    " ✅"
+                    "OTP Sent Successfully ✅\n\n" +
+                    "Demo OTP: 123456"
                 );
 
 
-                // Close login popup
-                if (loginOverlay) {
+                mobileBox.style.display = "none";
 
-                    loginOverlay.style.display = "none";
+                otpBox.style.display = "flex";
 
-                }
+                continueBtn.innerText =
+                    "VERIFY OTP";
 
-
-                // Open profile
-                window.location.href =
-                    "profile.html";
+                txtOTP.focus();
 
                 return;
             }
 
 
             // ======================================
-            // NEW CUSTOMER
+            // STEP 2 - VERIFY OTP
             // ======================================
 
-            console.log(
-                "New Customer - Name Required"
-            );
+            if (
+                otpBox.style.display !== "none" &&
+                (!nameBox ||
+                 nameBox.style.display === "none")
+            ) {
+
+                const otp =
+                    txtOTP.value.trim();
 
 
-            // Hide OTP
-            otpBox.style.display = "none";
+                if (!/^[0-9]{6}$/.test(otp)) {
+
+                    alert(
+                        "Enter 6 Digit OTP"
+                    );
+
+                    return;
+                }
 
 
-            // Show name box
-            if (nameBox && txtName) {
+                if (otp !== "123456") {
 
-                nameBox.style.display = "flex";
+                    alert(
+                        "Invalid OTP ❌"
+                    );
+
+                    return;
+                }
 
 
-                continueBtn.disabled = false;
+                console.log(
+                    "OTP VERIFIED ✅"
+                );
+
+
+                continueBtn.disabled = true;
 
                 continueBtn.innerText =
-                    "SAVE & CONTINUE";
-
-
-                txtName.value = "";
-
-                txtName.focus();
+                    "CHECKING...";
 
 
                 // ==================================
-                // SAVE BUTTON
+                // CHECK CUSTOMER
                 // ==================================
 
-                continueBtn.onclick = async function () {
+                try {
 
-                    const name =
-                        txtName.value.trim();
+                    const formData =
+                        new FormData();
 
 
-                    if (name === "") {
+                    formData.append(
+                        "mobile",
+                        enteredMobile
+                    );
+
+
+                    const response =
+                        await fetch(
+                            "api/check_customer.php",
+                            {
+                                method: "POST",
+                                body: formData
+                            }
+                        );
+
+
+                    const rawResponse =
+                        await response.text();
+
+
+                    console.log(
+                        "CHECK CUSTOMER RESPONSE:",
+                        rawResponse
+                    );
+
+
+                    if (!rawResponse.trim()) {
 
                         alert(
-                            "Please Enter Your Name"
+                            "PHP se empty response aa raha hai."
                         );
+
+                        continueBtn.disabled = false;
+
+                        continueBtn.innerText =
+                            "VERIFY OTP";
 
                         return;
                     }
 
 
-                    continueBtn.disabled = true;
-
-                    continueBtn.innerText =
-                        "SAVING...";
+                    let data;
 
 
-                    await saveNewCustomer(
-                        name,
-                        enteredMobile
+                    try {
+
+                        data =
+                            JSON.parse(rawResponse);
+
+                    }
+                    catch (jsonError) {
+
+                        console.error(
+                            "PHP JSON ERROR:",
+                            rawResponse
+                        );
+
+                        alert(
+                            "PHP se valid JSON response nahi aa raha."
+                        );
+
+                        continueBtn.disabled = false;
+
+                        continueBtn.innerText =
+                            "VERIFY OTP";
+
+                        return;
+                    }
+
+
+                    console.log(
+                        "CUSTOMER DATA:",
+                        data
                     );
 
-                };
 
-            }
-            else {
+                    if (!data.status) {
 
-                alert(
-                    "Name input nahi mila.\n\n" +
-                    "HTML me nameBox aur txtName check karo."
-                );
+                        alert(
+                            data.message ||
+                            "Customer check failed"
+                        );
 
-                continueBtn.disabled = false;
+                        continueBtn.disabled = false;
 
-                continueBtn.innerText =
-                    "VERIFY OTP";
+                        continueBtn.innerText =
+                            "VERIFY OTP";
 
+                        return;
+                    }
+
+
+                    // ======================================
+                    // EXISTING CUSTOMER
+                    // ======================================
+
+                    if (data.exists === true) {
+
+                        customerId =
+                            data.customer_id;
+
+
+                        const customerName =
+                            data.customer_name;
+
+
+                        console.log(
+                            "Existing Customer:",
+                            customerName
+                        );
+
+
+                        // ==================================
+                        // SAVE LOGIN
+                        // ==================================
+
+                        localStorage.setItem(
+                            "customerId",
+                            customerId
+                        );
+
+                        localStorage.setItem(
+                            "customerName",
+                            customerName
+                        );
+
+                        localStorage.setItem(
+                            "customerPhone",
+                            enteredMobile
+                        );
+
+                        localStorage.setItem(
+                            "isLoggedIn",
+                            "true"
+                        );
+
+
+                        // ==================================
+                        // UPDATE LAST LOGIN
+                        // ==================================
+
+                        await updateLastLogin(
+                            customerId
+                        );
+
+
+                        alert(
+                            "Welcome Back " +
+                            customerName +
+                            " ✅"
+                        );
+
+
+                        // ==================================
+                        // CLOSE LOGIN POPUP
+                        // ==================================
+
+                        if (loginOverlay) {
+
+                            loginOverlay.style.display =
+                                "none";
+
+                        }
+
+
+                        // ==================================
+                        // UPDATE CART LOGIN STATE
+                        // ==================================
+
+                        if (
+                            typeof updateCartLoginState ===
+                            "function"
+                        ) {
+
+                            updateCartLoginState();
+
+                        }
+
+
+                        // ==================================
+                        // AFTER LOGIN
+                        // ==================================
+
+                        redirectAfterLogin();
+
+
+                        return;
+                    }
+
+
+                    // ======================================
+                    // NEW CUSTOMER
+                    // ======================================
+
+                    console.log(
+                        "New Customer - Name Required"
+                    );
+
+
+                    otpBox.style.display =
+                        "none";
+
+
+                    if (nameBox && txtName) {
+
+                        nameBox.style.display =
+                            "flex";
+
+
+                        continueBtn.disabled =
+                            false;
+
+
+                        continueBtn.innerText =
+                            "SAVE & CONTINUE";
+
+
+                        txtName.value = "";
+
+                        txtName.focus();
+
+
+                        // ==================================
+                        // NEW CUSTOMER SAVE
+                        // ==================================
+
+                        continueBtn.onclick =
+                            async function () {
+
+                                const name =
+                                    txtName.value.trim();
+
+
+                                if (name === "") {
+
+                                    alert(
+                                        "Please Enter Your Name"
+                                    );
+
+                                    return;
+                                }
+
+
+                                continueBtn.disabled =
+                                    true;
+
+
+                                continueBtn.innerText =
+                                    "SAVING...";
+
+
+                                await saveNewCustomer(
+                                    name,
+                                    enteredMobile
+                                );
+
+                            };
+
+                    }
+                    else {
+
+                        alert(
+                            "Name input nahi mila."
+                        );
+
+                        continueBtn.disabled =
+                            false;
+
+                        continueBtn.innerText =
+                            "VERIFY OTP";
+
+                    }
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "LOGIN ERROR:",
+                        error
+                    );
+
+
+                    alert(
+                        "Something went wrong:\n\n" +
+                        error.message
+                    );
+
+
+                    continueBtn.disabled =
+                        false;
+
+                    continueBtn.innerText =
+                        "VERIFY OTP";
+
+                }
+
+
+                return;
             }
 
         }
-        catch (error) {
-
-            console.error(
-                "LOGIN ERROR:",
-                error
-            );
-
-            alert(
-                "Something went wrong:\n\n" +
-                error.message
-            );
-
-            continueBtn.disabled = false;
-
-            continueBtn.innerText =
-                "VERIFY OTP";
-
-        }
-
-    });
+    );
 
 
     // ==========================================
@@ -445,12 +516,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
 
-            const formData = new FormData();
+            const formData =
+                new FormData();
+
 
             formData.append(
                 "name",
                 name
             );
+
 
             formData.append(
                 "mobile",
@@ -458,13 +532,14 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-            const response = await fetch(
-                "api/save_customer.php",
-                {
-                    method: "POST",
-                    body: formData
-                }
-            );
+            const response =
+                await fetch(
+                    "api/save_customer.php",
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
 
 
             const rawResponse =
@@ -483,7 +558,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     "save_customer.php se empty response aa raha hai."
                 );
 
-                continueBtn.disabled = false;
+                continueBtn.disabled =
+                    false;
 
                 continueBtn.innerText =
                     "SAVE & CONTINUE";
@@ -497,9 +573,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             try {
 
-                data = JSON.parse(
-                    rawResponse
-                );
+                data =
+                    JSON.parse(rawResponse);
 
             }
             catch (jsonError) {
@@ -513,7 +588,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     "save_customer.php valid JSON nahi de raha."
                 );
 
-                continueBtn.disabled = false;
+                continueBtn.disabled =
+                    false;
 
                 continueBtn.innerText =
                     "SAVE & CONTINUE";
@@ -535,7 +611,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Customer save failed"
                 );
 
-                continueBtn.disabled = false;
+                continueBtn.disabled =
+                    false;
 
                 continueBtn.innerText =
                     "SAVE & CONTINUE";
@@ -545,12 +622,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             // ==================================
-            // SAVE LOCAL LOGIN
+            // CUSTOMER ID
             // ==================================
 
             customerId =
                 data.customer_id;
 
+
+            // ==================================
+            // SAVE LOGIN DETAILS
+            // ==================================
 
             localStorage.setItem(
                 "customerId",
@@ -573,7 +654,10 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-            // Update last login
+            // ==================================
+            // UPDATE LAST LOGIN
+            // ==================================
+
             await updateLastLogin(
                 customerId
             );
@@ -584,7 +668,10 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-            // Close popup
+            // ==================================
+            // CLOSE POPUP
+            // ==================================
+
             if (loginOverlay) {
 
                 loginOverlay.style.display =
@@ -593,9 +680,25 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
 
-            // Open profile
-            window.location.href =
-                "profile.html";
+            // ==================================
+            // UPDATE CART LOGIN STATE
+            // ==================================
+
+            if (
+                typeof updateCartLoginState ===
+                "function"
+            ) {
+
+                updateCartLoginState();
+
+            }
+
+
+            // ==================================
+            // AFTER LOGIN
+            // ==================================
+
+            redirectAfterLogin();
 
         }
         catch (error) {
@@ -605,12 +708,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 error
             );
 
+
             alert(
                 "Unable to save customer:\n\n" +
                 error.message
             );
 
-            continueBtn.disabled = false;
+
+            continueBtn.disabled =
+                false;
 
             continueBtn.innerText =
                 "SAVE & CONTINUE";
@@ -630,7 +736,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
         try {
 
-            const formData = new FormData();
+            const formData =
+                new FormData();
+
 
             formData.append(
                 "customer_id",
@@ -638,13 +746,14 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
 
-            const response = await fetch(
-                "api/update_last_login.php",
-                {
-                    method: "POST",
-                    body: formData
-                }
-            );
+            const response =
+                await fetch(
+                    "api/update_last_login.php",
+                    {
+                        method: "POST",
+                        body: formData
+                    }
+                );
 
 
             const rawResponse =
@@ -665,6 +774,48 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
         }
+
+    }
+
+
+    // ==========================================
+    // REDIRECT AFTER LOGIN
+    // ==========================================
+
+    function redirectAfterLogin() {
+
+        /*
+        Agar user checkout se login kar raha hai
+        to checkout par hi wapas jayega.
+        */
+
+        const returnPage =
+            sessionStorage.getItem(
+                "loginReturnPage"
+            );
+
+
+        if (returnPage) {
+
+            sessionStorage.removeItem(
+                "loginReturnPage"
+            );
+
+
+            window.location.href =
+                returnPage;
+
+            return;
+
+        }
+
+
+        /*
+        Normal navbar login
+        */
+
+        window.location.href =
+            "profile.html";
 
     }
 

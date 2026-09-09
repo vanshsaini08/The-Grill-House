@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="menu.css">
 <link rel="stylesheet" href="los.css">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
@@ -75,7 +76,13 @@
         <span class="nav-item" id="loginBtn">
     <i class="fas fa-user"></i> LOGIN
 </span>
-        <span class="nav-item"><i class="fas fa-shopping-bag"></i> CART</span>
+        <span class="nav-item cart-nav" id="cartNav">
+    <span class="cart-icon-wrapper">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="navCartCount" class="nav-cart-badge">0</span>
+    </span>
+    <span>CART</span>
+</span>
         <button class="search-btn" onclick="window.location.href='search.html'"><i class="fas fa-search"></i></button>
     </div>
 </nav>
@@ -129,11 +136,13 @@
 
             </div>
 
-            <button class="checkout-btn" id="checkoutBtn">
+         <button class="checkout-btn"
+        id="checkoutBtn"
+        onclick="window.location.href='checkout.html'">
 
-                CHECKOUT
+    CHECKOUT
 
-            </button>
+</button>
 
         </div>
 
@@ -180,7 +189,6 @@
 <script src="script.js"></script>
 <script src="menu.js"></script>
 <script src="cart.js"></script>
-<script src="script.js"></script>
 <script type="module" src="js/firebase-login.js"></script>
 </body>
 </html>

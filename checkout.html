@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Grill House</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="los.css">    
     <link rel="stylesheet" href="checkout.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>  
 <!-- ================= LOGIN POPUP ================= -->
@@ -75,7 +75,13 @@
         <span class="nav-item" id="loginBtn">
     <i class="fas fa-user"></i> LOGIN
 </span>
-        <span class="nav-item"><i class="fas fa-shopping-bag"></i> CART</span>
+       <span class="nav-item cart-nav" id="cartNav">
+    <span class="cart-icon-wrapper">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="navCartCount" class="nav-cart-badge">0</span>
+    </span>
+    <span>CART</span>
+</span>
         <button class="search-btn" onclick="window.location.href='search.html'"><i class="fas fa-search"></i></button>
     </div>
 </nav>
@@ -103,43 +109,27 @@
             <b>Cart</b>
 
         </div>
+<!-- ================= PERSONAL DETAILS ================= -->
 
+<div class="customer-details">
 
-        <!-- ORDER TYPE -->
-        <div class="order-type">
+    <h2>PERSONAL DETAILS</h2>
 
-            <h2>WHAT IS YOUR ORDER TYPE</h2>
+    <div class="customer-card">
 
-            <div class="order-tabs">
+        <span id="customerInfo">
+            TO PLACE YOUR ORDER NOW, LOGIN TO YOUR ACCOUNT.
+        </span>
 
-                <button class="active">
-                    DINE-IN
-                </button>
+        <button
+            type="button"
+            id="cartLoginBtn">
+            LOGIN TO PLACE ORDER
+        </button>
 
-                <button>
-                    TAKEAWAY
-                </button>
+    </div>
 
-            </div>
-
-        </div>
-
-
-        <!-- PERSONAL DETAILS -->
-        <div class="customer-details">
-
-            <h2>PERSONAL DETAILS</h2>
-
-            <div class="customer-card">
-
-                <span id="customerInfo">
-                    Guest User
-                </span>
-
-            </div>
-
-        </div>
-
+</div>
 
         <!-- RESTAURANT -->
         <div class="restaurant-section">
@@ -228,14 +218,21 @@
             </div>
 
 
-            <button
+            <!-- <button
                 class="make-payment-btn"
                 id="makePaymentBtn">
 
                 MAKE PAYMENT
 
-            </button>
+            </button> -->
+<button
+    class="make-payment-btn"
+    id="makePaymentBtn"
+    >
 
+    MAKE PAYMENT
+
+</button>
         </div>
 
     </div>
@@ -263,22 +260,6 @@
                 <!-- CART ITEMS JS SE AAYENGE -->
 
             </div>
-
-
-            <!-- SPECIAL INSTRUCTIONS -->
-
-            <div class="instructions-box">
-
-                <span>▣</span>
-
-                <input
-                    type="text"
-                    id="specialInstructions"
-                    placeholder="Special instructions for your meal (optional)..."
-                >
-
-            </div>
-
 
             <!-- CROWN + TABLE -->
 
@@ -381,14 +362,7 @@
                     (Optional) Donate ₹2 towards education
                     of an underprivileged girl
 
-                    <br>
-
-                    In association with
-
-                    <a href="#">
-                        Room to Read
-                    </a>
-
+                                      
                 </label>
 
             </div>
@@ -466,14 +440,87 @@
     </div>
 
 </div>
-<script src="script.js"></script>
+<!-- ================= PAYMENT POPUP ================= -->
+
+<div class="payment-overlay" id="paymentOverlay">
+
+    <div class="payment-popup">
+
+        <button class="payment-close" id="paymentClose">
+            &times;
+        </button>
+
+        <h2>CHOOSE PAYMENT METHOD</h2>
+
+        <p>Select how you want to pay</p>
+
+        <div class="payment-options">
+
+            <!-- CARD -->
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="selectedPayment"
+                    value="card"
+                >
+
+                <div class="payment-option-content">
+
+                    <i class="fas fa-credit-card"></i>
+
+                    <div>
+                        <strong>CARD</strong>
+                        <span>Pay using Debit / Credit Card</span>
+                    </div>
+
+                </div>
+
+            </label>
+
+
+            <!-- UPI -->
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="selectedPayment"
+                    value="upi"
+                >
+
+                <div class="payment-option-content">
+
+                    <i class="fas fa-mobile-screen-button"></i>
+
+                    <div>
+                        <strong>UPI</strong>
+                        <span>Pay using UPI</span>
+                    </div>
+
+                </div>
+
+            </label>
+
+        </div>
+
+
+        <button
+            class="confirm-payment-btn"
+            id="confirmPaymentBtn">
+
+            CONFIRM
+
+        </button>
+
+    </div>
+
+</div>
+ <script src="script.js"></script>
 <script src="cart.js"></script>
 <script src="php.js"></script>
 <script src="checkout.js"></script>
-
-
-<!-- Firebase Login -->
-<!-- <script type="module" src="js/firebase-auth.js"></script> -->
 <script type="module" src="js/firebase-login.js"></script>
 
 </body>

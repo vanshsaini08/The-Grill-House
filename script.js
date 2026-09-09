@@ -207,10 +207,9 @@ document.addEventListener(
     }
 );
 
+
 // ==========================================
-// ORDER TYPE POPUP
-//// ==========================================
-// ORDER TYPE POPUP
+// ORDER TYPE / SERVICE SYSTEM
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -218,22 +217,48 @@ document.addEventListener("DOMContentLoaded", function () {
     const popup = document.getElementById("servicePopup");
     const toggle = document.querySelector(".toggle-container");
 
-    const orderType = localStorage.getItem("orderType");
+    const serviceSelected =
+        sessionStorage.getItem("serviceSelected");
 
-    // First Visit
-    if (!orderType) {
-        popup.style.display = "flex";
-        return;
+    const orderType =
+        sessionStorage.getItem("orderType");
+
+
+    // ==========================================
+    // SERVICE POPUP — ONLY WHERE IT EXISTS
+    // ==========================================
+
+    if (popup) {
+
+        if (!serviceSelected) {
+
+            popup.style.display = "flex";
+
+        } else {
+
+            popup.style.display = "none";
+
+        }
+
     }
 
-    // Hide Popup
-    // popup.style.display = "none";
 
-    // Set Navbar Toggle
-    if (orderType === "takeaway") {
-        toggle.classList.add("switched");
-    } else {
-        toggle.classList.remove("switched");   // Default = Dine In
+    // ==========================================
+    // NAVBAR TOGGLE — ALL PAGES
+    // ==========================================
+
+    if (toggle) {
+
+        if (orderType === "dinein") {
+
+            toggle.classList.add("switched");
+
+        } else if (orderType === "takeaway") {
+
+            toggle.classList.remove("switched");
+
+        }
+
     }
 
 });
@@ -245,21 +270,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function selectService(type) {
 
-    const popup = document.getElementById("servicePopup");
-    const toggle = document.querySelector(".toggle-container");
+    const popup =
+        document.getElementById("servicePopup");
 
-    // Save Selection
-    localStorage.setItem("orderType", type);
+    const toggle =
+        document.querySelector(".toggle-container");
 
-    // Toggle Update
-    if (type === "takeaway") {
-        toggle.classList.add("switched");
-    } else {
-        toggle.classList.remove("switched");
+
+    sessionStorage.setItem("orderType", type);
+
+    sessionStorage.setItem(
+        "serviceSelected",
+        "true"
+    );
+
+
+    if (toggle) {
+
+        if (type === "dinein") {
+
+            toggle.classList.add("switched");
+
+        } else {
+
+            toggle.classList.remove("switched");
+
+        }
+
     }
 
-    // Close Popup
-    popup.style.display = "none";
+
+    if (popup) {
+
+        popup.style.display = "none";
+
+    }
 
 }
 
@@ -269,24 +314,57 @@ function selectService(type) {
 // ==========================================
 
 function closePopup() {
-    document.getElementById("servicePopup").style.display = "flex";
+
+    const popup =
+        document.getElementById("servicePopup");
+
+    if (!popup) return;
+
+    const serviceSelected =
+        sessionStorage.getItem("serviceSelected");
+
+    if (serviceSelected === "true") {
+
+        popup.style.display = "none";
+
+    }
+
 }
 
 
 // ==========================================
-// NAVBAR TOGGLE
+// NAVBAR TOGGLE — WORKS ON EVERY PAGE
 // ==========================================
 
 function toggleMode() {
 
-    const toggle = document.querySelector(".toggle-container");
+    const toggle =
+        document.querySelector(".toggle-container");
+
+    if (!toggle) return;
+
 
     toggle.classList.toggle("switched");
 
+
     if (toggle.classList.contains("switched")) {
-        localStorage.setItem("orderType", "takeaway");
+
+        sessionStorage.setItem(
+            "orderType",
+            "dinein"
+        );
+
     } else {
-        localStorage.setItem("orderType", "dinein");
+
+        sessionStorage.setItem(
+            "orderType",
+            "takeaway"
+        );
+
     }
 
 }
+
+
+
+

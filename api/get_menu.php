@@ -13,7 +13,8 @@ if ($category == "") {
 
 $sql = "SELECT id, item_name, price, category, image, gst_percent
         FROM menu
-        WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))";
+        WHERE LOWER(TRIM(category)) = LOWER(TRIM(?))
+        AND LOWER(TRIM(status)) = 'available'";
 
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $category);

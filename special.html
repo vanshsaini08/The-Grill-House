@@ -75,21 +75,32 @@
         <span class="nav-item" id="loginBtn">
     <i class="fas fa-user"></i> LOGIN
 </span>
-        <span class="nav-item"><i class="fas fa-shopping-bag"></i> CART</span>
+        <span class="nav-item cart-nav" id="cartNav">
+    <span class="cart-icon-wrapper">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="navCartCount" class="nav-cart-badge">0</span>
+    </span>
+    <span>CART</span>
+</span>
         <button class="search-btn" onclick="window.location.href='search.html'"><i class="fas fa-search"></i></button>
     </div>
 </nav>
 
-    <section class="deals-header">
-        <div class="header-pattern"></div>
-        <h1>KING DEALS</h1>
-        <div class="deal-toggle">
-            <button class="delivery-btn">DINE-IN</button>
-            <button class="dine-btn active">TAKEAWAY</button>
-        </div>
+ <section class="deals-header">
+    <div class="header-pattern"></div>
 
-    </section>
+    <h1>KING DEALS</h1>
 
+    <div class="deal-toggle toggle-container" onclick="toggleSpecialMode()">
+
+        <span class="label-text">DINE-IN</span>
+
+        <div id="switch" class="toggle-switch"></div>
+
+        <span class="label-text">TAKEAWAY</span>
+
+    </div>
+</section>
 
     <!-- ================= TOP DEALS ================= -->
 
@@ -124,15 +135,15 @@
 
         <div class="section-container">
 
-            <h2>LIMITED TIME DEALS</h2>
-
-        
-
-        </div>
+            <h2>LIMITED TIME DEALS</h2>        
+     </div>
+     <div class="t"><h5>No Offers available !!!</h5></div>
 
     </section>
 
-
+<section class="offer-help">
+    <button></button>
+</section>
     <!-- ================= LOYALTY CROWNS ================= -->
 
     <section class="loyalty-section">
@@ -140,7 +151,7 @@
         <div class="loyalty-container">
 
             <div class="loyalty-title">
-                BK Loyalty Crowns
+                Grill House Loyalty 
             </div>
 
             <div class="loyalty-columns">

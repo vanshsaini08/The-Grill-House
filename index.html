@@ -59,30 +59,6 @@
     </div>
 </div>
 
-    <!-- Popup -->
-<!-- <div class="service-popup" id="servicePopup">
-
-    <div class="popup-box">
-
-        <button class="popup-close" onclick="closePopup()">
-            &times;
-        </button>
-
-        <img src="images/logo 1.png" class="popup-logo">
-        <h2>Select Service</h2>
-        <div class="service-cards">
-          
-            <div class="service-card" id="deliveryCard" onclick="selectService('delivery')">
-                <img src="images/pop1.png" alt="Delivery">
-             
-            </div>
-           
-            <div class="service-card" id="dineCard" onclick="selectService('dinein')">
-                <img src="images/pop2.png" alt="Dine In">
-                           </div>
-        </div>
-    </div>
-</div> -->
 <div class="service-popup" id="servicePopup">
 
     <div class="popup-box">
@@ -137,7 +113,13 @@
         <span class="nav-item" id="loginBtn">
     <i class="fas fa-user"></i> LOGIN
 </span>
-        <span class="nav-item"><i class="fas fa-shopping-bag"></i> CART</span>
+        <span class="nav-item cart-nav" id="cartNav">
+    <span class="cart-icon-wrapper">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="navCartCount" class="nav-cart-badge">0</span>
+    </span>
+    <span>CART</span>
+</span>
         <button class="search-btn" onclick="window.location.href='search.html'"><i class="fas fa-search"></i></button>
     </div>
 </nav>
