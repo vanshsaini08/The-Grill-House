@@ -328,6 +328,9 @@ function escapeHTML(value) {
 // ======================================================
 // SEARCH PRODUCT BUTTON
 // ======================================================
+// ======================================================
+// SEARCH PRODUCT BUTTON
+// ======================================================
 
 function bindSearchProducts() {
 
@@ -367,8 +370,6 @@ function bindSearchProducts() {
                     Number(
                         card.dataset.price || 0
                     );
-
-                searchPopupQty = 1;
 
                 searchPopupGST =
                     Number(
@@ -432,13 +433,74 @@ function bindSearchProducts() {
 
 
                 // ======================================
-                // POPUP QUANTITY
+                // LOAD CURRENT CART QUANTITY
+                // ======================================
+
+                searchPopupQty = 1;
+
+                try {
+
+                    const savedCart =
+                        localStorage.getItem("cart");
+
+
+                    if (savedCart) {
+
+                        const savedItems =
+                            JSON.parse(savedCart);
+
+
+                        if (Array.isArray(savedItems)) {
+
+                            const existingItem =
+                                savedItems.find(
+                                    function (item) {
+
+                                        return (
+                                            item &&
+                                            String(item.id) ===
+                                            String(searchPopupId)
+                                        );
+
+                                    }
+                                );
+
+
+                            if (existingItem) {
+
+                                searchPopupQty =
+                                    Number(
+                                        existingItem.qty
+                                    ) || 0;
+
+                            }
+
+                        }
+
+                    }
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Search popup quantity load error:",
+                        error
+                    );
+
+                    searchPopupQty = 0;
+
+                }
+
+
+                // ======================================
+                // SHOW QUANTITY
                 // ======================================
 
                 const qtyValue =
                     document.getElementById(
                         "qtyValue"
                     );
+
 
                 if (qtyValue) {
 
@@ -449,7 +511,7 @@ function bindSearchProducts() {
 
 
                 // ======================================
-                // POPUP PRICE
+                // UPDATE POPUP PRICE
                 // ======================================
 
                 updateSearchPopupPrice();
@@ -464,6 +526,7 @@ function bindSearchProducts() {
                         "productOverlay"
                     );
 
+
                 if (overlay) {
 
                     overlay.classList.add("show");
@@ -476,7 +539,6 @@ function bindSearchProducts() {
     });
 
 }
-
 
 // ======================================================
 // UPDATE POPUP PRICE
@@ -682,6 +744,10 @@ document.addEventListener(
 // ADD TO CART
 // ======================================================
 
+// ======================================================
+// ADD TO CART
+// ======================================================
+
 document.addEventListener(
     "DOMContentLoaded",
     function () {
@@ -738,63 +804,162 @@ document.addEventListener(
 
 
                 // ======================================
-                // CREATE CART ITEM
+                // GET CURRENT CART
                 // ======================================
 
-                const item = {
+                let cart = [];
 
-                    id: searchPopupId,
+                try {
 
-                    name:
-                        document.getElementById(
-                            "popupTitle"
-                        )?.innerText || "",
-
-                    price:
-                        Number(
-                            searchPopupPrice
-                        ),
-
-                    qty:
-                        Number(
-                            searchPopupQty
-                        ),
-
-                    img:
-                        searchPopupImg,
-
-                    gst_percent:
-                        Number(
-                            searchPopupGST
-                        )
-
-                };
+                    const savedCart =
+                        localStorage.getItem("cart");
 
 
-                console.log(
-                    "SEARCH ADD TO CART:",
-                    item
+                    if (savedCart) {
+
+                        const parsedCart =
+                            JSON.parse(savedCart);
+
+
+                        if (Array.isArray(parsedCart)) {
+
+                            cart = parsedCart;
+
+                        }
+
+                    }
+
+                }
+                catch (error) {
+
+                    console.error(
+                        "Cart loading error:",
+                        error
+                    );
+
+                    cart = [];
+
+                }
+
+
+                // ======================================
+                // FIND EXISTING ITEM
+                // ======================================
+
+                const existingIndex =
+                    cart.findIndex(
+                        function (item) {
+
+                            return (
+                                item &&
+                                String(item.id) ===
+                                String(searchPopupId)
+                            );
+
+                        }
+                    );
+
+
+                // ======================================
+                // FINAL SELECTED QUANTITY
+                // ======================================
+
+                const finalQty =
+                    Number(searchPopupQty) || 0;
+
+
+                // ======================================
+                // QUANTITY = 0
+                // REMOVE ITEM
+                // ======================================
+
+                if (finalQty <= 0) {
+
+                    if (existingIndex !== -1) {
+
+                        cart.splice(
+                            existingIndex,
+                            1
+                        );
+
+                    }
+
+                }
+
+                // ======================================
+                // ITEM ALREADY EXISTS
+                // SET QUANTITY
+                // ======================================
+
+                else if (existingIndex !== -1) {
+
+                    cart[existingIndex].qty =
+                        finalQty;
+
+                    cart[existingIndex].price =
+                        Number(searchPopupPrice);
+
+                    cart[existingIndex].img =
+                        searchPopupImg;
+
+                    cart[existingIndex].gst_percent =
+                        Number(searchPopupGST);
+
+                }
+
+                // ======================================
+                // NEW ITEM
+                // ======================================
+
+                else {
+
+                    cart.push({
+
+                        id:
+                            searchPopupId,
+
+                        name:
+                            document.getElementById(
+                                "popupTitle"
+                            )?.innerText || "",
+
+                        price:
+                            Number(searchPopupPrice),
+
+                        qty:
+                            finalQty,
+
+                        img:
+                            searchPopupImg,
+
+                        gst_percent:
+                            Number(searchPopupGST)
+
+                    });
+
+                }
+
+
+                // ======================================
+                // SAVE CART
+                // ======================================
+
+                localStorage.setItem(
+                    "cart",
+                    JSON.stringify(cart)
                 );
 
 
                 // ======================================
-                // ADD TO CART
+                // REFRESH CART UI
                 // ======================================
 
                 if (
-                    typeof addToCart ===
+                    typeof renderCart ===
                     "function"
                 ) {
 
-                    addToCart(item);
-
-                } else {
-
-                    console.error(
-                        "addToCart() function not found"
-                    );
-
-                    return;
+                    renderCart();
 
                 }
 
@@ -819,12 +984,12 @@ document.addEventListener(
 
 
                 // ======================================
-                // RESET POPUP
+                // RESET POPUP VARIABLES
                 // ======================================
 
                 searchPopupId = null;
                 searchPopupPrice = 0;
-                searchPopupQty = 1;
+                searchPopupQty = 0;
                 searchPopupGST = 0;
                 searchPopupImg = "";
 
@@ -833,7 +998,6 @@ document.addEventListener(
 
     }
 );
-
 
 // ======================================================
 // POPULAR SEARCH

@@ -220,109 +220,164 @@ body{
     text-transform: uppercase;
 }
 
-.service-popup{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.35);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
+/* =========================================
+   SERVICE SELECTION POPUP
+========================================= */
+
+.service-popup {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
-.popup-box{
-    width:498px;
-    height: 470px;
-    background:#fbf2e4;
-    border-radius:18px;
-    padding:38px;
-    position:relative;
-    box-shadow:0 15px 45px rgba(0,0,0,.25);
-}
-
-.popup-close{
-    position:absolute;
-    right:18px;
-    top:18px;
-    width:38px;
-    height:38px;
-    border:none;
-    border-radius:50%;
-    background:#fff;
-    color:#f47a20;
-    font-size:30px;
-    cursor:pointer;
-    line-height:38px;
-    transition:.3s;
-}
-
-
-
-.popup-close:hover{
-    transform:rotate(90deg);
-}
-
-.popup-logo{
-    width:140px;
+/* POPUP BOX - COMPACT */
+.popup-box {
+    width: 420px;
     height: auto;
-    display:block;
-    margin:0 auto 20px;
+    min-height: 360px;
+    background: #fbf2e4;
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
 }
 
-.popup-box h2{
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:28px;
-    font-weight:700;
-    color:#181818;
-    text-align:center;
-    letter-spacing:-0.5px;
-    margin:-20px 0 32px;
-}
-.service-cards{
-    display:flex;
-    gap:24px;
-}
-
-.service-card{
-    flex:1;
-    background:#fff;
-    border-radius:14px;
-    padding:28px 20px;
-    text-align:center;
-    cursor:pointer;
-    box-shadow:0 5px 18px rgba(0,0,0,.10);
-    transition:.25s;
+/* CLOSE BUTTON */
+.popup-close {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #f47a20;
+    font-size: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    line-height: 30px;
+    text-align: center;
+    padding: 0;
+    z-index: 10;
+    transition: 0.3s ease;
 }
 
-.service-card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 30px rgba(0,0,0,.15);
+.popup-close:hover {
+    transform: rotate(90deg);
+    background: #f47a20;
+    color: white;
 }
 
-.service-card img{
-    width:165px;
-    height: 120px;
-    display:block;
-    margin:0 auto 20px;
+/* LOGO */
+.popup-logo {
+    width: 100px;
+    height: auto;
+    display: block;
+    margin: 0 auto 8px;
 }
 
-.service-card p{
-    margin:0;
-    font-size:23px;
-    font-weight:600;
-    color:#111;
+/* TITLE */
+.popup-box h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 23px;
+    font-weight: 700;
+    color: #181818;
+    text-align: center;
+    letter-spacing: -0.3px;
+    margin: 0 0 22px;
 }
 
-/* Selected Card */
-.service-card.active{
-    border:2px solid #F57C00;
-    box-shadow:0 12px 30px rgba(244,122,32,.25);
-    transform:translateY(-3px);
+/* SERVICE CARDS */
+.service-cards {
+    display: flex;
+    gap: 16px;
 }
 
-/* Smooth click effect */
-.service-card:active{
-    transform:scale(.98);
+/* CARD */
+.service-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
+    transition: 0.25s;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
+}
+
+/* SERVICE IMAGE */
+.service-card img {
+    width: 125px;
+    height: 95px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+}
+
+/* CARD TEXT */
+.service-card p {
+    margin: 8px 0 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #111;
+}
+
+/* SELECTED CARD */
+.service-card.active {
+    border: 2px solid #f57c00;
+    box-shadow: 0 10px 25px rgba(244, 122, 32, 0.25);
+    transform: translateY(-3px);
+}
+
+/* CLICK EFFECT */
+.service-card:active {
+    transform: scale(0.98);
+}
+
+/* MOBILE */
+@media (max-width: 500px) {
+
+    .popup-box {
+        width: 90%;
+        min-height: auto;
+        padding: 22px 18px;
+    }
+
+    .popup-logo {
+        width: 85px;
+    }
+
+    .popup-box h2 {
+        font-size: 21px;
+        margin-bottom: 18px;
+    }
+
+    .service-cards {
+        gap: 10px;
+    }
+
+    .service-card {
+        padding: 12px 8px;
+    }
+
+    .service-card img {
+        width: 105px;
+        height: 80px;
+    }
+
+    .service-card p {
+        font-size: 16px;
+    }
 }
 
 
@@ -604,4 +659,88 @@ text-decoration: none;
     justify-content: center;
 
     line-height: 16px;
+}
+
+/* ==========================================
+   FINAL ORDER TYPE COLORS
+   ========================================== */
+
+
+/* ==========================================
+   DINE-IN SELECTED
+   TOGGLE = LEFT
+   switched CLASS = NOT PRESENT
+   ========================================== */
+
+/* DINE-IN = ACTIVE / BROWN */
+.navbar .toggle-container:not(.switched) .label-text:first-child {
+    color: #6d392a !important;
+}
+
+/* TAKEAWAY = DISABLED / SILVER */
+.navbar .toggle-container:not(.switched) .label-text:last-child {
+    color: #a9a9a9 !important;
+}
+
+/* TOGGLE = BROWN */
+.navbar .toggle-container:not(.switched) .toggle-switch {
+    background-color: #6d392a !important;
+}
+
+
+/* ==========================================
+   TAKEAWAY SELECTED
+   TOGGLE = RIGHT
+   switched CLASS = PRESENT
+   ========================================== */
+
+/* DINE-IN = DISABLED / SILVER */
+.navbar .toggle-container.switched .label-text:first-child {
+    color: #a9a9a9 !important;
+}
+
+/* TAKEAWAY = ACTIVE / RED */
+.navbar .toggle-container.switched .label-text:last-child {
+    color: #d62300 !important;
+}
+
+/* TOGGLE = RED */
+.navbar .toggle-container.switched .toggle-switch {
+    background-color: #d62300 !important;
+}
+
+
+/* ==========================================
+   SEARCH ICON
+   ========================================== */
+
+/* DINE-IN = BROWN */
+.navbar:has(.toggle-container:not(.switched)) .search-btn {
+    color: #8d4024 !important;
+}
+
+/* TAKEAWAY = RED */
+.navbar:has(.toggle-container.switched) .search-btn {
+    color: #d62300 !important;
+}
+
+
+/* ==========================================
+   EXPLORE FULL MENU
+   ========================================== */
+
+/* DINE-IN = BROWN */
+.explore-btn {
+    background: #8d4024 !important;
+    color: white !important;
+}
+
+/* TAKEAWAY = RED */
+.explore-btn.takeaway-mode {
+    background: #d62300 !important;
+    color: white !important;
+}
+
+.explore-btn.takeaway-mode:hover {
+    background: #b51d00 !important;
 }

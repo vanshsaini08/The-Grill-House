@@ -1,5 +1,6 @@
 // ======================================================
-// CHECKOUT PAGE - LOGIN + CART SYSTEM
+// CHECKOUT PAGE
+// LOGIN + CART + GST + PROMO DISCOUNT + DONATION + QR
 // ======================================================
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -26,6 +27,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const orderTotal =
         document.getElementById("orderTotal");
 
+    const discountAmount =
+        document.getElementById("discountAmount");
+
     const taxAmount =
         document.getElementById("taxAmount");
 
@@ -37,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==================================================
-    // CHECK LOGIN STATUS
+    // LOGIN CHECK
     // ==================================================
 
     function isUserLoggedIn() {
@@ -63,10 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const loggedIn =
             isUserLoggedIn();
 
-
-        // ==============================================
-        // USER LOGGED IN
-        // ==============================================
 
         if (loggedIn) {
 
@@ -110,11 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
-
-        // ==============================================
-        // USER NOT LOGGED IN
-        // ==============================================
-
         else {
 
             customerInfo.innerHTML = `
@@ -143,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==================================================
-    // OPEN LOGIN POPUP
+    // OPEN LOGIN
     // ==================================================
 
     function openCheckoutLogin() {
@@ -158,11 +153,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         }
 
-
-        // ==============================================
-        // IMPORTANT
-        // LOGIN KE BAAD CHECKOUT PAR RETURN KARNA HAI
-        // ==============================================
 
         sessionStorage.setItem(
             "loginReturnPage",
@@ -193,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==================================================
-    // CART DATA
+    // GET CART
     // ==================================================
 
     function getCart() {
@@ -205,9 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             if (!savedCart) {
-
                 return [];
-
             }
 
 
@@ -216,14 +204,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             if (!Array.isArray(parsed)) {
-
                 return [];
-
             }
 
 
-            return parsed.filter(
-                function (item) {
+            return parsed
+                .filter(function (item) {
 
                     return (
                         item &&
@@ -232,10 +218,40 @@ document.addEventListener("DOMContentLoaded", function () {
                         Number(item.qty) > 0
                     );
 
-                }
-            );
+                })
+                .map(function (item) {
+
+                    return {
+
+                        id:
+                            String(item.id),
+
+                        name:
+                            String(
+                                item.name ||
+                                "Unknown Item"
+                            ),
+
+                        price:
+                            Number(item.price) || 0,
+
+                        qty:
+                            Number(item.qty) || 0,
+
+                        img:
+                            item.img || "",
+
+                        gst_percent:
+                            Number(
+                                item.gst_percent
+                            ) || 0
+
+                    };
+
+                });
 
         }
+
         catch (error) {
 
             console.error(
@@ -246,6 +262,217 @@ document.addEventListener("DOMContentLoaded", function () {
             return [];
 
         }
+
+    }
+
+
+    // ==================================================
+    // SAVE CART
+    // ==================================================
+
+    function saveCheckoutCart(cartData) {
+
+        try {
+
+            localStorage.setItem(
+                "cart",
+                JSON.stringify(cartData)
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Checkout cart save error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    // ==================================================
+    // GET VALID PROMO DISCOUNT
+    // ==================================================
+
+    function getDiscount(subtotal) {
+
+        subtotal =
+            Number(subtotal) || 0;
+
+
+        const offers = [
+
+            {
+                code: "WELCOME100",
+                minAmount: 599,
+                discount: 100
+            },
+
+            {
+                code: "WELCOME299",
+                minAmount: 1299,
+                discount: 299
+            }
+
+        ];
+
+
+        let promoCode =
+            sessionStorage.getItem(
+                "promoCode"
+            );
+
+
+        let savedDiscount =
+            sessionStorage.getItem(
+                "promoDiscount"
+            );
+
+
+        if (
+            !promoCode ||
+            savedDiscount === null
+        ) {
+
+            return 0;
+
+        }
+
+
+        promoCode =
+            String(promoCode)
+                .trim()
+                .toUpperCase();
+
+
+        const offer =
+            offers.find(function (item) {
+
+                return (
+                    item.code ===
+                    promoCode
+                );
+
+            });
+
+
+        if (!offer) {
+
+            sessionStorage.removeItem(
+                "promoCode"
+            );
+
+            sessionStorage.removeItem(
+                "promoDiscount"
+            );
+
+            return 0;
+
+        }
+
+
+        if (
+            subtotal <
+            offer.minAmount
+        ) {
+
+            console.log(
+                "PROMO REMOVED - CART BELOW MINIMUM:",
+                promoCode
+            );
+
+
+            sessionStorage.removeItem(
+                "promoCode"
+            );
+
+            sessionStorage.removeItem(
+                "promoDiscount"
+            );
+
+
+            return 0;
+
+        }
+
+
+        let discount =
+            Number(offer.discount);
+
+
+        if (
+            !Number.isFinite(discount) ||
+            discount < 0
+        ) {
+
+            discount = 0;
+
+        }
+
+
+        discount =
+            Math.min(
+                discount,
+                subtotal
+            );
+
+
+        return discount;
+
+    }
+
+
+    // ==================================================
+    // CALCULATE GST - GST ON TOP
+    // ==================================================
+
+    function calculateGST(cartData) {
+
+        let totalGST = 0;
+
+
+        cartData.forEach(function (item) {
+
+            const price =
+                Number(item.price) || 0;
+
+            const qty =
+                Number(item.qty) || 0;
+
+            const gstPercent =
+                Number(item.gst_percent) || 0;
+
+
+            const itemTotal =
+                price * qty;
+
+
+            if (
+                itemTotal <= 0 ||
+                gstPercent <= 0
+            ) {
+
+                return;
+
+            }
+
+
+            const gst =
+                itemTotal *
+                gstPercent /
+                100;
+
+
+            totalGST +=
+                gst;
+
+        });
+
+
+        return totalGST;
 
     }
 
@@ -263,9 +490,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         if (!checkoutCartItems) {
-
             return;
-
         }
 
 
@@ -283,24 +508,49 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (checkoutCart.length === 0) {
 
+            sessionStorage.removeItem(
+                "promoCode"
+            );
+
+            sessionStorage.removeItem(
+                "promoDiscount"
+            );
+
+
             checkoutCartItems.innerHTML = `
 
                 <div class="empty-cart">
+
+                    <div class="empty-cart-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
 
                     <h3>
                         Your cart is empty
                     </h3>
 
                     <p>
-                        Add some delicious items!
+                        Looks like you haven't added anything to your cart yet.
                     </p>
+
+                    <button
+                        type="button"
+                        class="empty-cart-btn"
+                        onclick="window.location.href='menu.html'"
+                    >
+                        EXPLORE MENU
+                    </button>
 
                 </div>
 
             `;
 
 
-            updateCheckoutTotal(0);
+            updateCheckoutTotal(
+                0,
+                checkoutCart
+            );
+
 
             return;
 
@@ -308,11 +558,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         // ==============================================
-        // ITEMS
+        // CALCULATE SUBTOTAL
         // ==============================================
 
-        let total =
-            0;
+        let subtotal = 0;
 
 
         checkoutCart.forEach(
@@ -321,6 +570,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 const price =
                     Number(item.price) || 0;
 
+                const qty =
+                    Number(item.qty) || 0;
+
+
+                subtotal +=
+                    price * qty;
+
+            }
+        );
+
+
+        // ==============================================
+        // RENDER ITEMS
+        // ==============================================
+
+        checkoutCart.forEach(
+            function (item, index) {
+
+                const price =
+                    Number(item.price) || 0;
 
                 const qty =
                     Number(item.qty) || 1;
@@ -330,30 +599,79 @@ document.addEventListener("DOMContentLoaded", function () {
                     price * qty;
 
 
-                total +=
-                    itemTotal;
-
-
                 checkoutCartItems.innerHTML += `
 
-                    <div class="checkout-cart-item">
+                    <div
+                        class="checkout-cart-item"
+                        data-index="${index}"
+                    >
 
-                        <div class="checkout-item-info">
+                        <!-- REMOVE CROSS -->
 
-                            <strong>
-                                ${escapeHTML(item.name)}
-                            </strong>
+                        <button
+                            type="button"
+                            class="checkout-remove"
+                            data-index="${index}"
+                            title="Remove item"
+                            aria-label="Remove ${escapeHTML(item.name)}"
+                        >
+                            ×
+                        </button>
 
-                            <span>
-                                Qty: ${qty}
-                            </span>
+
+                        <div class="checkout-item-left">
+
+                            <div class="checkout-item-info">
+
+                                <h3>
+                                    ${escapeHTML(item.name)}
+                                </h3>
+
+                                <p>
+                                    Freshly Prepared
+                                </p>
+
+                            </div>
 
                         </div>
 
 
-                        <div class="checkout-item-price">
+                        <div class="checkout-item-right">
 
-                            ₹${itemTotal.toFixed(2)}
+                            <div class="checkout-qty">
+
+                                <button
+                                    type="button"
+                                    class="checkout-minus"
+                                    data-index="${index}"
+                                    aria-label="Decrease quantity"
+                                >
+                                    −
+                                </button>
+
+
+                                <span>
+                                    ${qty}
+                                </span>
+
+
+                                <button
+                                    type="button"
+                                    class="checkout-plus"
+                                    data-index="${index}"
+                                    aria-label="Increase quantity"
+                                >
+                                    +
+                                </button>
+
+                            </div>
+
+
+                            <strong
+                                class="checkout-item-total"
+                            >
+                                ₹${itemTotal.toFixed(2)}/-
+                            </strong>
 
                         </div>
 
@@ -365,56 +683,423 @@ document.addEventListener("DOMContentLoaded", function () {
         );
 
 
-        updateCheckoutTotal(total);
+        // ==============================================
+        // UPDATE TOTALS
+        // ==============================================
+
+        updateCheckoutTotal(
+            subtotal,
+            checkoutCart
+        );
+
+
+        // ==============================================
+        // PLUS BUTTON
+        // ==============================================
+
+        checkoutCartItems
+            .querySelectorAll(".checkout-plus")
+            .forEach(function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const index =
+                            Number(
+                                this.dataset.index
+                            );
+
+
+                        const cart =
+                            getCart();
+
+
+                        if (!cart[index]) {
+                            return;
+                        }
+
+
+                        cart[index].qty =
+                            Number(
+                                cart[index].qty
+                            ) + 1;
+
+
+                        saveCheckoutCart(
+                            cart
+                        );
+
+
+                        renderCheckoutCart();
+
+                    }
+                );
+
+            });
+
+
+        // ==============================================
+        // MINUS BUTTON
+        // ==============================================
+
+        checkoutCartItems
+            .querySelectorAll(".checkout-minus")
+            .forEach(function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function () {
+
+                        const index =
+                            Number(
+                                this.dataset.index
+                            );
+
+
+                        const cart =
+                            getCart();
+
+
+                        if (!cart[index]) {
+                            return;
+                        }
+
+
+                        cart[index].qty =
+                            Number(
+                                cart[index].qty
+                            ) - 1;
+
+
+                        if (
+                            cart[index].qty <= 0
+                        ) {
+
+                            cart.splice(
+                                index,
+                                1
+                            );
+
+                        }
+
+
+                        saveCheckoutCart(
+                            cart
+                        );
+
+
+                        renderCheckoutCart();
+
+                    }
+                );
+
+            });
+
+
+        // ==============================================
+        // REMOVE ITEM
+        // ==============================================
+
+        checkoutCartItems
+            .querySelectorAll(".checkout-remove")
+            .forEach(function (button) {
+
+                button.addEventListener(
+                    "click",
+                    function (e) {
+
+                        e.preventDefault();
+                        e.stopPropagation();
+
+
+                        const index =
+                            Number(
+                                this.dataset.index
+                            );
+
+
+                        const cart =
+                            getCart();
+
+
+                        if (
+                            !Number.isInteger(index) ||
+                            !cart[index]
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        // Completely remove item
+                        cart.splice(
+                            index,
+                            1
+                        );
+
+
+                        // Save updated cart
+                        saveCheckoutCart(
+                            cart
+                        );
+
+
+                        // Re-render cart + totals
+                        renderCheckoutCart();
+
+                    }
+                );
+
+            });
 
     }
 
 
     // ==================================================
-    // UPDATE TOTAL
+    // UPDATE CHECKOUT TOTAL
     // ==================================================
 
-    function updateCheckoutTotal(subtotal) {
+    function updateCheckoutTotal(
+        subtotal,
+        cartData
+    ) {
 
-        const tax =
-            0;
+        subtotal =
+            Number(subtotal) || 0;
+
+
+        cartData =
+            Array.isArray(cartData)
+                ? cartData
+                : [];
+
+
+        // ==============================================
+        // GST - ON TOP
+        // ==============================================
+
+        const totalGST =
+            calculateGST(cartData);
+
+
+        // ==============================================
+        // ORDER TOTAL
+        // ==============================================
+
+        const orderBaseTotal =
+            subtotal;
+
+
+        // ==============================================
+        // PROMO DISCOUNT
+        // ==============================================
 
         const discount =
-            0;
+            getDiscount(subtotal);
 
+
+        // ==============================================
+        // DONATION
+        // ==============================================
+
+        const donationCheckbox =
+            document.getElementById(
+                "donation"
+            );
+
+
+        const donation =
+            donationCheckbox &&
+            donationCheckbox.checked
+                ? 2
+                : 0;
+
+
+        // ==============================================
+        // OFFER ELIGIBILITY AMOUNT
+        // ==============================================
+
+        const offerPayableAmount =
+            Math.max(
+                0,
+                subtotal
+            );
+
+
+        sessionStorage.setItem(
+            "checkoutPayableAmount",
+            offerPayableAmount.toFixed(2)
+        );
+
+
+        localStorage.setItem(
+            "checkoutPayableAmount",
+            offerPayableAmount.toFixed(2)
+        );
+
+
+        // ==============================================
+        // FINAL TOTAL
+        // ==============================================
 
         const finalTotal =
-            subtotal + tax - discount;
+            Math.max(
+                0,
+                orderBaseTotal +
+                totalGST -
+                discount +
+                donation
+            );
 
+
+        // ==============================================
+        // ORDER TOTAL
+        // ==============================================
 
         if (orderTotal) {
 
             orderTotal.innerText =
-                "₹" + subtotal.toFixed(2);
+                "₹" +
+                orderBaseTotal.toFixed(2);
 
         }
 
+
+        // ==============================================
+        // DISCOUNT
+        // ==============================================
+
+        if (discountAmount) {
+
+            discountAmount.innerText =
+                "- ₹" +
+                discount.toFixed(2);
+
+        }
+
+
+        // ==============================================
+        // GST
+        // ==============================================
 
         if (taxAmount) {
 
             taxAmount.innerText =
-                "₹" + tax.toFixed(2);
+                "₹" +
+                totalGST.toFixed(2);
 
         }
 
+
+        // ==============================================
+        // FINAL TO PAY
+        // ==============================================
 
         if (finalAmount) {
 
             finalAmount.innerText =
-                "₹" + finalTotal.toFixed(2);
+                "₹" +
+                finalTotal.toFixed(2);
 
         }
 
 
+        // ==============================================
+        // PAYMENT AMOUNT
+        // ==============================================
+
         if (paymentAmount) {
 
             paymentAmount.innerText =
-                "₹" + finalTotal.toFixed(2);
+                "₹" +
+                finalTotal.toFixed(2);
+
+        }
+
+
+        console.log(
+            "FINAL CHECKOUT CALCULATION:",
+            {
+
+                orderTotal:
+                    orderBaseTotal.toFixed(2),
+
+                gstOnTop:
+                    totalGST.toFixed(2),
+
+                discount:
+                    discount.toFixed(2),
+
+                donation:
+                    donation.toFixed(2),
+
+                payableAmount:
+                    finalTotal.toFixed(2)
+
+            }
+        );
+
+    }
+
+
+    // ==================================================
+    // QR TABLE NUMBER
+    // ==================================================
+
+    function updateCheckoutTable() {
+
+        const tableOption =
+            document.getElementById(
+                "qrTableOption"
+            );
+
+
+        const tableNumberElement =
+            document.getElementById(
+                "checkoutTableNumber"
+            );
+
+
+        if (
+            !tableOption ||
+            !tableNumberElement
+        ) {
+            return;
+        }
+
+
+        const tableFromQR =
+            sessionStorage.getItem(
+                "tableFromQR"
+            );
+
+
+        const savedTable =
+            sessionStorage.getItem(
+                "tableNumber"
+            );
+
+
+        if (
+            tableFromQR === "true" &&
+            savedTable
+        ) {
+
+            tableNumberElement.innerText =
+                savedTable.toUpperCase();
+
+
+            tableOption.style.display =
+                "block";
+
+        }
+
+        else {
+
+            tableOption.style.display =
+                "none";
 
         }
 
@@ -452,16 +1137,20 @@ document.addEventListener("DOMContentLoaded", function () {
         function () {
 
             if (
-                document.visibilityState === "visible"
+                document.visibilityState ===
+                "visible"
             ) {
 
                 updateCustomerDetails();
 
                 renderCheckoutCart();
 
+                updateCheckoutTable();
+
             }
 
         }
+
     );
 
 
@@ -496,11 +1185,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     getCart();
 
 
-                if (checkoutCart.length === 0) {
+                if (
+                    checkoutCart.length === 0
+                ) {
 
                     alert(
                         "No items are added to your cart."
                     );
+
 
                     return;
 
@@ -508,22 +1200,116 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
                 // ======================================
-                // PAYMENT POPUP
+                // UPDATE LATEST TOTAL
                 // ======================================
 
-                const paymentOverlay =
+                let subtotal = 0;
+
+
+                checkoutCart.forEach(
+                    function (item) {
+
+                        subtotal +=
+                            Number(item.price) *
+                            Number(item.qty);
+
+                    }
+                );
+
+
+                updateCheckoutTotal(
+                    subtotal,
+                    checkoutCart
+                );
+
+
+                // ======================================
+                // GET FINAL PAYMENT AMOUNT
+                // ======================================
+
+                const finalPayable =
                     document.getElementById(
-                        "paymentOverlay"
+                        "finalAmount"
                     );
 
 
-                if (paymentOverlay) {
+                let payableAmount = 0;
 
-                    paymentOverlay.classList.add(
-                        "show"
+
+                if (finalPayable) {
+
+                    payableAmount =
+                        Number(
+                            finalPayable.innerText
+                                .replace(/[₹,]/g, "")
+                                .trim()
+                        ) || 0;
+
+                }
+
+
+                // ======================================
+                // SAVE EXACT FINAL TO PAY
+                // ======================================
+
+                sessionStorage.setItem(
+                    "checkoutFinalAmount",
+                    payableAmount.toFixed(2)
+                );
+
+
+                localStorage.setItem(
+                    "checkoutFinalAmount",
+                    payableAmount.toFixed(2)
+                );
+
+
+                // ======================================
+                // SAVE SUMMARY DATA
+                // ======================================
+
+                if (orderTotal) {
+
+                    sessionStorage.setItem(
+                        "checkoutOrderTotal",
+                        orderTotal.innerText
+                            .replace(/[₹,]/g, "")
+                            .trim()
                     );
 
                 }
+
+
+                if (discountAmount) {
+
+                    sessionStorage.setItem(
+                        "checkoutDiscount",
+                        discountAmount.innerText
+                            .replace(/[₹,-]/g, "")
+                            .trim()
+                    );
+
+                }
+
+
+                if (taxAmount) {
+
+                    sessionStorage.setItem(
+                        "checkoutTax",
+                        taxAmount.innerText
+                            .replace(/[₹,]/g, "")
+                            .trim()
+                    );
+
+                }
+
+
+                // ======================================
+                // OPEN PAYMENT PAGE
+                // ======================================
+
+                window.location.href =
+                    "payment.html";
 
             }
         );
@@ -568,11 +1354,58 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // ==================================================
+    // DONATION CHANGE
+    // ==================================================
+
+    const donationCheckbox =
+        document.getElementById(
+            "donation"
+        );
+
+
+    if (donationCheckbox) {
+
+        donationCheckbox.addEventListener(
+            "change",
+            function () {
+
+                const checkoutCart =
+                    getCart();
+
+
+                let subtotal = 0;
+
+
+                checkoutCart.forEach(
+                    function (item) {
+
+                        subtotal +=
+                            Number(item.price) *
+                            Number(item.qty);
+
+                    }
+                );
+
+
+                updateCheckoutTotal(
+                    subtotal,
+                    checkoutCart
+                );
+
+            }
+        );
+
+    }
+
+
+    // ==================================================
     // INITIALIZE
     // ==================================================
 
     updateCustomerDetails();
 
     renderCheckoutCart();
+
+    updateCheckoutTable();
 
 });

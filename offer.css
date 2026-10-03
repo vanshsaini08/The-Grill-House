@@ -1,0 +1,404 @@
+/* ======================================================
+   OFFERS PAGE
+====================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #542313;
+    color: #111;
+}
+
+
+/* ======================================================
+   TOP PROMO HEADER
+====================================================== */
+
+.offers-header {
+    width: 100%;
+    height: 54px;
+
+    background: #f5ebdc;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    border-top: 3px solid #303746;
+}
+
+
+/* ======================================================
+   BACK BUTTON
+====================================================== */
+
+.offers-back {
+    position: absolute;
+
+    left: 16px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    border: none;
+    background: transparent;
+
+    font-size: 24px;
+
+    color: #e87500;
+
+    cursor: pointer;
+
+    padding: 5px 8px;
+}
+
+
+/* ======================================================
+   PROMO INPUT AREA
+====================================================== */
+
+.promo-code-box {
+    width: 430px;
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+
+    gap: 24px;
+}
+
+
+.promo-code-box input {
+    width: 358px;
+
+    height: 36px;
+
+    border: none;
+    border-bottom: 1px solid #999;
+
+    background: transparent;
+
+    outline: none;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 12px;
+
+    color: #333;
+
+    padding: 0;
+}
+
+
+.promo-code-box input::placeholder {
+    color: #888;
+}
+
+
+.promo-code-box button {
+    border: none;
+
+    background: transparent;
+
+    color: #e12600;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+}
+
+
+/* ======================================================
+   MAIN OFFERS AREA
+====================================================== */
+
+.offers-page {
+    width: 100%;
+
+    min-height: calc(100vh - 54px);
+
+    background: #542313;
+
+    padding-top: 20px;
+}
+
+
+.offers-container {
+    width: 450px;
+
+    margin: 0 auto;
+}
+
+
+/* ======================================================
+   TITLE
+====================================================== */
+
+.offers-title {
+    margin: 0 0 16px 13px;
+
+    font-family: Georgia, serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #777;
+}
+
+
+/* ======================================================
+   OFFER CARD
+====================================================== */
+
+.offer-card {
+    width: 450px;
+
+    min-height: 118px;
+
+    background: #f5ebdc;
+
+    border-radius: 3px;
+
+    margin-bottom: 18px;
+
+    padding: 14px 14px 12px 14px;
+
+    position: relative;
+}
+
+
+/* ======================================================
+   OFFER CARD TOP
+====================================================== */
+
+.offer-card-top {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* ======================================================
+   PROMO CODE
+====================================================== */
+
+.offer-code {
+    display: inline-block;
+
+    background: #d1d1d1;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    padding: 7px 10px;
+
+    border-radius: 2px;
+
+    letter-spacing: 0.2px;
+}
+
+
+/* ======================================================
+   APPLY BUTTON
+====================================================== */
+
+.offer-apply-btn {
+    width: 65px;
+
+    height: 30px;
+
+    border: none;
+
+    background: #c9c9c9;
+
+    color: #ffffff;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.offer-apply-btn:hover {
+    background: #b8b8b8;
+}
+
+
+/* ======================================================
+   OFFER DESCRIPTION
+====================================================== */
+
+.offer-description {
+    margin: 15px 0 0 0;
+
+    font-size: 11px;
+
+    line-height: 18px;
+
+    color: #5b180b;
+}
+
+
+/* ======================================================
+   OFFER STATUS
+====================================================== */
+
+.offer-status {
+    margin: 18px 0 0 0;
+
+    text-align: right;
+
+    font-size: 11px;
+
+    color: red;
+
+    min-height: 16px;
+}
+
+
+/* ======================================================
+   ELIGIBLE OFFER
+====================================================== */
+
+.offer-card.eligible .offer-code {
+    background: #d62300;
+}
+
+
+.offer-card.eligible .offer-apply-btn {
+    background: #d62300;
+
+    cursor: pointer;
+}
+
+
+/* ======================================================
+   APPLIED OFFER
+====================================================== */
+
+.offer-card.applied {
+    border: 2px solid #d62300;
+}
+
+
+.offer-card.applied .offer-code {
+    background: #d62300;
+}
+
+
+.offer-card.applied .offer-apply-btn {
+    background: #542313;
+}
+
+
+/* ======================================================
+   MOBILE
+====================================================== */
+
+@media (max-width: 600px) {
+
+    .offers-header {
+        height: 54px;
+    }
+
+
+    .promo-code-box {
+        width: calc(100% - 90px);
+
+        gap: 12px;
+    }
+
+
+    .promo-code-box input {
+        width: 100%;
+
+        font-size: 11px;
+    }
+
+
+    .promo-code-box button {
+        font-size: 12px;
+    }
+
+
+    .offers-container {
+        width: calc(100% - 30px);
+    }
+
+
+    .offer-card {
+        width: 100%;
+
+        min-height: 118px;
+    }
+
+
+    .offers-title {
+        margin-left: 5px;
+    }
+
+}
+
+
+/* ======================================================
+   VERY SMALL MOBILE
+====================================================== */
+
+@media (max-width: 380px) {
+
+    .offers-back {
+        left: 8px;
+    }
+
+
+    .promo-code-box {
+        width: calc(100% - 70px);
+    }
+
+
+    .offer-card {
+        padding: 12px;
+    }
+
+
+    .offer-code {
+        font-size: 10px;
+
+        padding: 6px 8px;
+    }
+
+
+    .offer-apply-btn {
+        width: 60px;
+
+        height: 28px;
+
+        font-size: 10px;
+    }
+
+}

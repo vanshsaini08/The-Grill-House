@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment - The Grill House</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="payment.css">
+</head>
+
+<body>
+
+<div class="payment-page">
+
+    <!-- HEADER -->
+    <header class="payment-header">
+
+        <button
+            type="button"
+            class="back-btn"
+            onclick="goBackToCheckout()">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+
+        <div class="payment-logo">
+            <img src="images/logo 1.png" alt="The Grill House">
+        </div>
+
+        <div class="secure-payment">
+            <i class="fas fa-lock"></i>
+            Secure Payment
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+    <main class="payment-container">
+
+        <!-- LEFT -->
+        <section class="payment-left">
+
+            <div class="payment-title">
+                <h1>Complete Payment</h1>
+                <p>Choose your preferred payment method</p>
+            </div>
+
+
+            <!-- PAYMENT METHODS -->
+            <div class="payment-methods">
+
+                <button
+                    type="button"
+                    class="payment-method active"
+                    data-method="card">
+
+                    <div class="method-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+
+                    <div class="method-info">
+                        <strong>Card</strong>
+                        <span>Debit / Credit Card</span>
+                    </div>
+
+                    <i class="fas fa-chevron-right"></i>
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="payment-method"
+                    data-method="upi">
+
+                    <div class="method-icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+
+                    <div class="method-info">
+                        <strong>UPI / QR</strong>
+                        <span>Scan QR and pay</span>
+                    </div>
+
+                    <i class="fas fa-chevron-right"></i>
+
+                </button>
+
+            </div>
+
+
+            <!-- CARD PANEL -->
+            <div
+                class="payment-panel"
+                id="cardPanel">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <h2>Card Payment</h2>
+                        <p>Enter your card details</p>
+                    </div>
+
+                    <i class="fas fa-credit-card"></i>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Card Number</label>
+
+                    <div class="input-icon">
+
+                        <i class="fas fa-credit-card"></i>
+
+                        <input
+                            type="text"
+                            id="cardNumber"
+                            maxlength="19"
+                            placeholder="Card Number">
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>Card Holder Name</label>
+
+                    <div class="input-icon">
+
+                        <i class="fas fa-user"></i>
+
+                        <input
+                            type="text"
+                            id="cardHolder"
+                            placeholder="Card Holder Name">
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>Expiry</label>
+
+                        <input
+                            type="text"
+                            id="expiry"
+                            maxlength="5"
+                            placeholder="MM/YY">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>CVV</label>
+
+                        <input
+                            type="password"
+                            id="cvv"
+                            maxlength="3"
+                            placeholder="CVV">
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="pay-button"
+                    id="cardPayBtn">
+
+                    <span>PAY NOW</span>
+
+                    <strong id="cardPayAmount">
+                        ₹0.00
+                    </strong>
+
+                </button>
+
+            </div>
+
+
+            <!-- UPI PANEL -->
+            <div
+                class="payment-panel"
+                id="upiPanel"
+                style="display:none;">
+
+                <div class="panel-heading">
+
+                    <div>
+                        <h2>UPI / QR Payment</h2>
+                        <p>Scan the QR code using your UPI app</p>
+                    </div>
+
+                    <i class="fas fa-qrcode"></i>
+
+                </div>
+
+
+                <div class="qr-container">
+
+                    <div class="qr-box">
+
+                        <div class="fake-qr">
+
+                            <div class="qr-corner top-left"></div>
+                            <div class="qr-corner top-right"></div>
+                            <div class="qr-corner bottom-left"></div>
+
+                            <div class="qr-pattern">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <h3>Scan & Pay</h3>
+
+                    <p>The Grill House</p>
+
+                    <strong>
+                        grillhouse@upi
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="pay-button"
+                    id="upiPayBtn">
+
+                    <span>PAY NOW</span>
+
+                    <strong id="upiPayAmount">
+                        ₹0.00
+                    </strong>
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- RIGHT -->
+        <aside class="payment-right">
+
+            <div class="order-summary">
+
+                <div class="summary-heading">
+
+                    <h2>Order Summary</h2>
+
+                    <i class="fas fa-receipt"></i>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Customer</span>
+
+                    <strong id="customerName">
+                        Guest
+                    </strong>
+
+                </div>
+
+
+                <div
+                    class="summary-row"
+                    id="tableRow"
+                    style="display:none;">
+
+                    <span>Table</span>
+
+                    <strong id="tableNumber">
+                        --
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-divider"></div>
+
+
+                <div class="summary-row">
+
+                    <span>Order Total</span>
+
+                    <strong id="summaryOrderTotal">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row discount-row">
+
+                    <span>Discount</span>
+
+                    <strong id="summaryDiscount">
+                        - ₹0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>Taxes & Charges</span>
+
+                    <strong id="summaryTax">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-divider"></div>
+
+
+                <div class="summary-total">
+
+                    <span>TO PAY</span>
+
+                    <strong id="summaryTotal">
+                        ₹0.00
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+    </main>
+
+</div>
+
+
+<!-- PROCESSING -->
+<div
+    class="payment-status-overlay"
+    id="processingOverlay">
+
+    <div class="status-popup">
+
+        <div class="loader"></div>
+
+        <h2>Processing Payment</h2>
+
+        <p>Please wait...</p>
+
+    </div>
+
+</div>
+
+
+<!-- SUCCESS -->
+<div
+    class="payment-status-overlay"
+    id="successOverlay">
+
+    <div class="status-popup success-popup">
+
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+
+        <h2>ORDER CONFIRMED</h2>
+
+        <p>
+            Your order has been placed successfully.
+        </p>
+
+
+        <div class="success-amount">
+
+            <span>Amount Paid</span>
+
+            <strong id="successAmount">
+                ₹0.00
+            </strong>
+
+        </div>
+
+
+        <div class="success-order-box">
+
+            <span>ORDER ID</span>
+
+            <strong id="successOrderID">
+                #0000
+            </strong>
+
+        </div>
+
+
+        <div class="success-order-status">
+
+            <i class="fas fa-clock"></i>
+
+            <span>
+                Order Status:
+                <strong>Pending</strong>
+            </span>
+
+        </div>
+
+
+        <button
+            type="button"
+            id="successContinueBtn">
+
+            CONTINUE
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="payment.js"></script>
+
+</body>
+</html>

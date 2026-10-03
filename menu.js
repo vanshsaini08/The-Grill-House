@@ -30,10 +30,11 @@ async function fetchMenu() {
             params.get("cat") || "Pizza";
 
 
-        const response = await fetch(
-            "api/get_menu.php?cat=" +
-            encodeURIComponent(category)
-        );
+        const response =
+            await fetch(
+                "api/get_menu.php?cat=" +
+                encodeURIComponent(category)
+            );
 
 
         const data =
@@ -189,7 +190,9 @@ function bindProductCards() {
                     if (!card) return;
 
 
+                    // ==========================================
                     // SAVE PRODUCT DATA
+                    // ==========================================
 
                     popupProductId =
                         card.dataset.id;
@@ -201,7 +204,9 @@ function bindProductCards() {
                         Number(card.dataset.gst || 0);
 
 
+                    // ==========================================
                     // PRODUCT IMAGE
+                    // ==========================================
 
                     const popupImage =
                         document.getElementById("popupImage");
@@ -214,7 +219,9 @@ function bindProductCards() {
                     }
 
 
+                    // ==========================================
                     // PRODUCT NAME
+                    // ==========================================
 
                     const popupTitle =
                         document.getElementById("popupTitle");
@@ -227,7 +234,9 @@ function bindProductCards() {
                     }
 
 
+                    // ==========================================
                     // DESCRIPTION
+                    // ==========================================
 
                     const popupDescription =
                         document.getElementById(
@@ -242,13 +251,98 @@ function bindProductCards() {
                     }
 
 
-                    // RESET QUANTITY
+                    // ==========================================
+                    // LOAD CURRENT CART QUANTITY
+                    // ==========================================
 
+                    // Default quantity is ALWAYS 1
                     popupQty = 1;
 
 
+                    try {
+
+                        const savedCart =
+                            localStorage.getItem("cart");
+
+
+                        if (savedCart) {
+
+                            const savedItems =
+                                JSON.parse(savedCart);
+
+
+                            if (Array.isArray(savedItems)) {
+
+                                const existingItem =
+                                    savedItems.find(function (item) {
+
+                                        return (
+                                            item &&
+                                            String(item.id) ===
+                                            String(popupProductId)
+                                        );
+
+                                    });
+
+
+                                if (existingItem) {
+
+                                    const existingQty =
+                                        Number(existingItem.qty);
+
+
+                                    // Existing quantity must
+                                    // never make popup 0
+                                    if (
+                                        Number.isFinite(existingQty) &&
+                                        existingQty >= 1
+                                    ) {
+
+                                        popupQty =
+                                            existingQty;
+
+                                    }
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+                    catch (error) {
+
+                        console.error(
+                            "Popup quantity load error:",
+                            error
+                        );
+
+                        popupQty = 1;
+
+                    }
+
+
+                    // ==========================================
+                    // FINAL SAFETY
+                    // ==========================================
+
+                    if (
+                        !Number.isFinite(popupQty) ||
+                        popupQty < 1
+                    ) {
+
+                        popupQty = 1;
+
+                    }
+
+
+                    // ==========================================
+                    // SHOW QUANTITY
+                    // ==========================================
+
                     const qtyValue =
                         document.getElementById("qtyValue");
+
 
                     if (qtyValue) {
 
@@ -258,17 +352,22 @@ function bindProductCards() {
                     }
 
 
-                    // PRICE
+                    // ==========================================
+                    // UPDATE PRICE
+                    // ==========================================
 
                     updatePopupPrice();
 
 
+                    // ==========================================
                     // OPEN POPUP
+                    // ==========================================
 
                     const overlay =
                         document.getElementById(
                             "productOverlay"
                         );
+
 
                     if (overlay) {
 
@@ -432,7 +531,27 @@ document.addEventListener(
                 "click",
                 function () {
 
-                    if (popupQty <= 1) return;
+                    // Quantity 1 se neeche nahi jayegi
+                    if (popupQty <= 1) {
+
+                        popupQty = 1;
+
+                        const qtyValue =
+                            document.getElementById(
+                                "qtyValue"
+                            );
+
+                        if (qtyValue) {
+
+                            qtyValue.innerText = 1;
+
+                        }
+
+                        updatePopupPrice();
+
+                        return;
+
+                    }
 
 
                     popupQty--;
@@ -467,16 +586,13 @@ document.addEventListener(
 // ADD TO CART
 // ======================================================
 
-// ======================================================
-// ADD TO CART
-// ======================================================
-
 document.addEventListener(
     "DOMContentLoaded",
     function () {
 
         const popupAddCart =
             document.getElementById("popupAddCart");
+
 
         if (!popupAddCart) return;
 
@@ -492,16 +608,38 @@ document.addEventListener(
                 const popupTitle =
                     document.getElementById("popupTitle");
 
+
                 const popupImage =
                     document.getElementById("popupImage");
 
 
-                if (!popupTitle) return;
+                if (
+                    !popupTitle ||
+                    popupProductId === null
+                ) {
+
+                    return;
+
+                }
 
 
-                // ==================================
+                // ==========================================
+                // SAFETY
+                // ==========================================
+
+                if (
+                    !Number.isFinite(popupQty) ||
+                    popupQty < 1
+                ) {
+
+                    popupQty = 1;
+
+                }
+
+
+                // ==========================================
                 // CREATE CART ITEM
-                // ==================================
+                // ==========================================
 
                 const item = {
 
@@ -522,33 +660,143 @@ document.addEventListener(
                 };
 
 
-                // ==================================
-                // ADD TO CART
-                // ==================================
+                // ==========================================
+                // IMPORTANT
+                // ==========================================
+                // Existing item ko ADD nahi karna.
+                // Popup quantity ko CART quantity par SET
+                // karna hai.
+                // ==========================================
 
-                if (typeof addToCart === "function") {
+                let currentCart = [];
 
-                    addToCart(item);
+                try {
 
-                } else {
+                    const savedCart =
+                        localStorage.getItem("cart");
+
+
+                    if (savedCart) {
+
+                        const parsedCart =
+                            JSON.parse(savedCart);
+
+
+                        if (Array.isArray(parsedCart)) {
+
+                            currentCart =
+                                parsedCart;
+
+                        }
+
+                    }
+
+                }
+                catch (error) {
 
                     console.error(
-                        "addToCart() function not found"
+                        "Cart reading error:",
+                        error
                     );
 
-                    return;
+                    currentCart = [];
 
                 }
 
 
-                // ==================================
-                // CLOSE PRODUCT POPUP
-                // ==================================
+                const existingIndex =
+                    currentCart.findIndex(function (cartItem) {
+
+                        return (
+                            cartItem &&
+                            String(cartItem.id) ===
+                            String(popupProductId)
+                        );
+
+                    });
+
+
+                // ==========================================
+                // EXISTING ITEM
+                // ==========================================
+
+                if (existingIndex !== -1) {
+
+                    currentCart[existingIndex].qty =
+                        popupQty;
+
+                    currentCart[existingIndex].price =
+                        popupPrice;
+
+                    currentCart[existingIndex].name =
+                        popupTitle.innerText;
+
+                    currentCart[existingIndex].gst_percent =
+                        popupGST;
+
+                    if (popupImage) {
+
+                        currentCart[existingIndex].img =
+                            popupImage.src;
+
+                    }
+
+                }
+
+                // ==========================================
+                // NEW ITEM
+                // ==========================================
+
+                else {
+
+                    currentCart.push(item);
+
+                }
+
+
+                // ==========================================
+                // SAVE CART
+                // ==========================================
+
+                localStorage.setItem(
+                    "cart",
+                    JSON.stringify(currentCart)
+                );
+
+
+                // ==========================================
+                // UPDATE CART UI
+                // ==========================================
+
+                if (
+                    typeof loadCart ===
+                    "function"
+                ) {
+
+                    loadCart();
+
+                }
+
+
+                if (
+                    typeof renderCart ===
+                    "function"
+                ) {
+
+                    renderCart();
+
+                }
+
+
+                // ==========================================
+                // CLOSE POPUP
+                // ==========================================
 
                 const productOverlay =
                     document.getElementById(
                         "productOverlay"
                     );
+
 
                 if (productOverlay) {
 
@@ -557,22 +805,6 @@ document.addEventListener(
                     );
 
                 }
-
-
-                // ==================================
-                // IMPORTANT
-                // ==================================
-                // CART YAHAN OPEN NAHI HOGA.
-                //
-                // cartSidebar.classList.add("show")
-                // NAHI
-                //
-                // cartHeader.classList.add("show")
-                // NAHI
-                //
-                // renderCart() bhi yahan manually nahi.
-                //
-                // ==================================
 
             }
         );
@@ -737,7 +969,9 @@ window.addEventListener(
         await fetchMenu();
 
 
+        // ==========================================
         // CART UPDATE
+        // ==========================================
 
         if (
             typeof renderCart ===

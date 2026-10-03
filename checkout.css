@@ -388,7 +388,7 @@ INPUT BOX
 
     font-size:13px;
 
-    color:#777;
+    color:#2c2b2b;
 
 }
 
@@ -505,22 +505,32 @@ INPUT BOX
 /* =========================================
    CART ITEM
 ========================================= */
+/* =========================================
+   CART ITEM - SPACING FIX
+========================================= */
 
-.checkout-cart-item{
-    width:100%;
-    box-sizing:border-box;
+.checkout-cart-item {
+    width: 100%;
+    box-sizing: border-box;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 
-    gap:15px;
+    gap: 15px;
 
-    padding-bottom:16px;
+    padding-bottom: 20px;
+    margin-bottom: 12px;
 
-    border-bottom:1px solid #eee;
+    border-bottom: 1px solid #eee;
+
+    position: relative;
 }
 
+/* Last item ke neeche extra gap nahi */
+.checkout-cart-item:last-child {
+    margin-bottom: 0;
+}y
 /* =========================================
    ITEM LEFT
 ========================================= */
@@ -546,7 +556,7 @@ INPUT BOX
     font-size:12px;
     line-height:15px;
 
-    color:#555;
+    color:#555050;
 }
 
 .customise{
@@ -1214,4 +1224,152 @@ INPUT BOX
 
     background:#60311f;
 
+}
+
+
+
+/* =========================================
+   EMPTY CART
+========================================= */
+
+.empty-cart {
+    width: 100%;
+    min-height: 280px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* ICON */
+
+.empty-cart-icon {
+    width: 75px;
+    height: 75px;
+
+    border-radius: 50%;
+
+    background: #f5ebdc;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+}
+
+
+.empty-cart-icon i {
+    font-size: 30px;
+    color: #8d4024;
+}
+
+
+/* TITLE */
+
+.empty-cart h3 {
+    margin: 0 0 8px;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    color: #502314;
+}
+
+
+/* DESCRIPTION */
+
+.empty-cart p {
+    margin: 0 0 22px;
+
+    font-size: 14px;
+
+    color: #777;
+
+    max-width: 300px;
+
+    line-height: 1.5;
+}
+
+
+/* BUTTON */
+
+.empty-cart-btn {
+    border: none;
+
+    padding: 12px 25px;
+
+    border-radius: 8px;
+
+    background: #8d4024;
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.empty-cart-btn:hover {
+    background: #6d392a;
+    transform: translateY(-1px);
+}
+
+
+
+
+/* ==========================================
+   CHECKOUT REMOVE CROSS - FINAL
+========================================== */
+
+
+.checkout-remove {
+   
+
+    top: 2px;
+    right: 2px;
+
+    width: 18px;
+    height: 18px;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    background: transparent;
+
+    color: #d62300;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    line-height: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 999;
+
+    transition: 0.15s ease;
+}
+
+.checkout-remove:hover {
+    color: #a90000;
+    transform: scale(1.1);
 }

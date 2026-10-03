@@ -582,7 +582,7 @@ body{
 }
 
 .cart-left h3 {
-    margin: 0;
+    margin: 25px 0 0;
 
     font-size: 16px;
 
@@ -637,7 +637,8 @@ body{
 
     gap: 8px;
    border-radius: 20px;
-    margin: 0;
+    margin:0px ;
+    
     border: 1px solid #7b452f;
 
     overflow: visible;
@@ -1097,3 +1098,135 @@ body{
 
 }
 
+
+
+
+/* ==========================================
+   FINAL ORDER TYPE COLORS
+   ========================================== */
+
+
+/* ==========================================
+   DINE-IN SELECTED
+   TOGGLE = LEFT
+   switched CLASS = NOT PRESENT
+   ========================================== */
+
+/* DINE-IN = ACTIVE / BROWN */
+.navbar .toggle-container:not(.switched) .label-text:first-child {
+    color: #6d392a !important;
+}
+
+/* TAKEAWAY = DISABLED / SILVER */
+.navbar .toggle-container:not(.switched) .label-text:last-child {
+    color: #a9a9a9 !important;
+}
+
+/* TOGGLE = BROWN */
+.navbar .toggle-container:not(.switched) .toggle-switch {
+    background-color: #6d392a !important;
+}
+
+
+/* ==========================================
+   TAKEAWAY SELECTED
+   TOGGLE = RIGHT
+   switched CLASS = PRESENT
+   ========================================== */
+
+/* DINE-IN = DISABLED / SILVER */
+.navbar .toggle-container.switched .label-text:first-child {
+    color: #a9a9a9 !important;
+}
+
+/* TAKEAWAY = ACTIVE / RED */
+.navbar .toggle-container.switched .label-text:last-child {
+    color: #d62300 !important;
+}
+
+/* TOGGLE = RED */
+.navbar .toggle-container.switched .toggle-switch {
+    background-color: #d62300 !important;
+}
+
+
+/* ==========================================
+   SEARCH ICON
+   ========================================== */
+
+/* DINE-IN = BROWN */
+.navbar:has(.toggle-container:not(.switched)) .search-btn {
+    color: #8d4024 !important;
+}
+
+/* TAKEAWAY = RED */
+.navbar:has(.toggle-container.switched) .search-btn {
+    color: #d62300 !important;
+}
+
+
+/* ==========================================
+   EXPLORE FULL MENU
+   ========================================== */
+
+/* DINE-IN = BROWN */
+.explore-btn {
+    background: #8d4024 !important;
+    color: white !important;
+}
+
+/* TAKEAWAY = RED */
+.explore-btn.takeaway-mode {
+    background: #d62300 !important;
+    color: white !important;
+}
+
+.explore-btn.takeaway-mode:hover {
+    background: #b51d00 !important;
+}
+
+
+/* ===== MENU CART CROSS FINAL ===== */
+
+.cart-item {
+    position: relative !important;
+}
+
+.cart-remove {
+    position: absolute !important;
+
+    top: -10px !important;
+    right: -10px !important;
+
+    width: 18px !important;
+    height: 18px !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    border: 0 !important;
+    background: transparent !important;
+
+    color: #d62300 !important;
+
+    font-size: 17px !important;
+    font-weight: 700 !important;
+
+    line-height: 18px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    z-index: 999 !important;
+}
+
+.cart-remove:hover {
+    color: #a90000 !important;
+    transform: scale(1.1);
+}
+
+/* Quantity box cross ke neeche rahe */
+.cart-right {
+    padding-top: 22px !important;
+}

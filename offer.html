@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Offers - The Grill House</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="offer.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         OFFERS HEADER
+    ========================================== -->
+
+    <div class="offers-header">
+
+        <button
+            type="button"
+            class="offers-back"
+            onclick="window.location.href='checkout.html'">
+
+            <i class="fas fa-arrow-left"></i>
+
+        </button>
+
+
+        <div class="promo-code-box">
+
+            <input
+                type="text"
+                id="promoCodeInput"
+                placeholder="Enter Promo code"
+                autocomplete="off">
+
+            <button
+                type="button"
+                id="applyPromoBtn">
+
+                APPLY
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================
+         OFFERS CONTENT
+    ========================================== -->
+
+    <div class="offers-page">
+
+
+        <div class="offers-container">
+
+
+            <h3 class="offers-title">
+                AVAILABLE OFFERS
+            </h3>
+
+
+            <!-- =====================================
+                 WELCOME 100
+            ====================================== -->
+
+            <div
+                class="offer-card"
+                id="offerWelcome100">
+
+
+                <div class="offer-card-top">
+
+
+                    <span class="offer-code">
+                        WELCOME100
+                    </span>
+
+
+                    <button
+                        type="button"
+                        class="offer-apply-btn"
+                        data-code="WELCOME100">
+
+                        APPLY
+
+                    </button>
+
+
+                </div>
+
+
+                <p class="offer-description">
+
+                    Flat Discount of ₹100/- on Orders Above ₹599/-
+
+                </p>
+
+
+                <p
+                    class="offer-status"
+                    id="statusWelcome100">
+
+                </p>
+
+
+            </div>
+
+
+
+            <!-- =====================================
+                 WELCOME 299
+            ====================================== -->
+
+            <div
+                class="offer-card"
+                id="offerWelcome299">
+
+
+                <div class="offer-card-top">
+
+
+                    <span class="offer-code">
+                        WELCOME299
+                    </span>
+
+
+                    <button
+                        type="button"
+                        class="offer-apply-btn"
+                        data-code="WELCOME299">
+
+                        APPLY
+
+                    </button>
+
+
+                </div>
+
+
+                <p class="offer-description">
+
+                    Flat Discount of ₹299/- on Orders Above ₹1299/-
+
+                </p>
+
+
+                <p
+                    class="offer-status"
+                    id="statusWelcome299">
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =========================================
+         OFFER JS
+    ========================================== -->
+
+    <script src="offer.js"></script>
+<!-- <script src="checkout.js"></script> -->
+<script src="script.js"></script>
+</body>
+
+</html>
